@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from PyQt5.QtCore import *
-from Mesh import Mesh
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
+from PyQt5.QtCore import * #gui
+from Mesh import Mesh  #keep track of elements, nodes and boundaries
+from PyQt5.QtGui import * #gui
+from PyQt5.QtWidgets import * #gui
 
-import numpy as np
+import numpy as np # python libraries for arrays and matrices
 
-class Rectangle(object):
+class Rectangle(object): #describes a rectangle
   
 
     def __init__(self, height, width, nodes,edges):
@@ -39,7 +39,7 @@ class Rectangle(object):
 
 
 
-class RectGenerator(QWidget):
+class RectGenerator(QWidget): #defines gui layout rectangle
 
     meshCreated = pyqtSignal(Mesh.Mesh)
     
@@ -54,7 +54,7 @@ class RectGenerator(QWidget):
 
         layout = QVBoxLayout(self)
 
-        #define element size
+        # gui layout for element size
         res = QGroupBox('Resolution')
         resLayout = QGridLayout(res)
 
@@ -72,28 +72,28 @@ class RectGenerator(QWidget):
         ###add new square
         newCreate = QGroupBox('Add new square')
         newLayout = QGridLayout(newCreate)
-
+        #defines rectangle height 
         self.newhEdit = QLineEdit()
         newLayout.addWidget(QLabel('Height :'),0,0)
         newLayout.addWidget(self.newhEdit,0,1)
         heightNew = lambda: float(self.newhEdit.text())
-
+        #defines rectangle width
         self.newwEdit = QLineEdit()
         newLayout.addWidget(QLabel('Width :'),1,0)
         newLayout.addWidget(self.newwEdit,1,1)
         widthNew = lambda: float(self.newwEdit.text())
-        
+        #alternates betwween L shape and T shape
         self.alignment = QComboBox()
         self.alignment.addItems(['Middle','Bottom', 'Top'])
         newLayout.addWidget(self.alignment,2,0,1,2)
 
-
+        #sets up button for adding rectangle
         addnew = QPushButton('Add')
         newLayout.addWidget(addnew,3,0)
         addnew.clicked.connect(lambda: self.addNewRectangle(heightNew(),widthNew()))
         newLayout.setRowStretch(4,1)
         
-        #generate
+        # sets up button to generates nodes
         generate = QGroupBox('Generate')
         genLayout = QGridLayout(generate)
 
@@ -102,9 +102,9 @@ class RectGenerator(QWidget):
         genNodes.clicked.connect(self.generateNodes)
      
 
-        layout.addWidget(res)
-        layout.addWidget(newCreate)
-        layout.addWidget(generate)
+        layout.addWidget(res) # defines element size, dx and dy
+        layout.addWidget(newCreate) # creates rectangle
+        layout.addWidget(generate) #generates mesh
 
         layout.addStretch(3)
 
@@ -299,6 +299,8 @@ class RectGenerator(QWidget):
 
                 for i in range(len(edgeNodes)-1):
                     boundary = Mesh.Boundary([nodes[edgeNodes[i]], nodes[edgeNodes[i+1]]])
+                    nodes[edgeNodes[i]].isBoundary = True
+                    nodes[edgeNodes[i+1]].isBoundary = True
                     
                     
                     
@@ -325,6 +327,23 @@ class RectGenerator(QWidget):
         
         mesh.nx = nx
         mesh.ny = ny
+		
+        for node in mesh.nodes:
+            print("nodes nudges")
+            node.nudge(self.dx(), self.dy())
+			
+        print("nodes nudges")
+		#reSkew = True	
+		#while reSkew:
+		#	reSkew = False
+		#	for elem in mesh.elements:
+		#		if elem.badSkew():
+		#			reSkew True
+		#			for node in elem.nodes:
+		#				node.nudge()
+		#				if not elem.badSkew():
+		#					break
+			
         self.meshCreated.emit(mesh)
 
                 

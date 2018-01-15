@@ -16,6 +16,7 @@ import PhasesCaller
 import numpy as np
 from math import sqrt
 from copy import deepcopy
+from random import random
 
 def loadMeshFromFile(files):
     """
@@ -679,6 +680,7 @@ class Node(object):
         self.index = None
         self.isBoundary = False
         
+		
         self.temperature = []
         self.concentration = []
         self.uVelocity = []
@@ -686,6 +688,11 @@ class Node(object):
         self.wVelocity = []
         self.pressure = []
         self.liquidFrac = []
+		
+    def nudge(self, dx, dy):
+        if not self.isBoundary:
+            self.x = self.x + random()*dx/2 - dx/4
+            self.y = self.y + random()*dy/2 - dy/4
 
     def clearData(self):
         """
@@ -735,7 +742,22 @@ class Element(object):
                                   'temperature': None,
                                   'u-velocity': None,
                                   'v-velocity': None
-                                      }                                  
+                                      }  
+        """
+        def badSkew(self, maxSkew):
+        return False
+	
+        for node in self.nodes:
+            index = self.nodes.index(node)
+            node1 = self.nodes[index-1]
+            node2 = self.nodes[index+1]
+        x1 = node.x - node1.x
+        y1 = node.y - node1.y
+        x2 = node.x - node2.x
+        y2 = node.y - node2.y
+		
+        theta = arccos((x1*x2+y1*y2)/sqrt((x1^2+y1^2))/sqrt((x2^2 +y2^2)))
+        """
     def __str__(self):
         info = "Element object with index of %s,nodes at (%s,%s),(%s,%s),(%s,%s),(%s,%s)." %(self.index, self.nodes[0].x,self.nodes[0].y,self.nodes[1].x,self.nodes[1].y,self.nodes[2].x,self.nodes[2].y,self.nodes[3].x,self.nodes[3].y)
         if self.boundaries:
