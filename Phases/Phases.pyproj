@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{a269b204-cd90-41a4-9ae4-ffa297382a89}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>DataPrep.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="DataPrep.py" />
+    <Compile Include="graphs.py" />
+    <Compile Include="Mesh\ConditionEditor\MeshEditor.py" />
+    <Compile Include="Mesh\ConditionEditor\Tools.py" />
+    <Compile Include="Mesh\ConditionEditor\__init__.py" />
+    <Compile Include="Mesh\Generation\EdgeGenerator.py" />
+    <Compile Include="Mesh\Generation\MeshGenerator.py" />
+    <Compile Include="Mesh\Generation\NodeGenerator.py" />
+    <Compile Include="Mesh\Generation\RectGenerator.py" />
+    <Compile Include="Mesh\Generation\__init__.py" />
+    <Compile Include="Mesh\Mesh.py" />
+    <Compile Include="Mesh\__init__.py" />
+    <Compile Include="mplCanvas.py" />
+    <Compile Include="paint.py" />
+    <Compile Include="PhasesCaller.py" />
+    <Compile Include="PhasesController.py" />
+    <Compile Include="PlotController.py" />
+    <Compile Include="QtPHASES.py" />
+    <Compile Include="setup.py" />
+    <Compile Include="__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Mesh\ConditionEditor\Icons\boundaryConditions.png" />
+    <Content Include="Mesh\ConditionEditor\Icons\clear.png" />
+    <Content Include="Mesh\ConditionEditor\Icons\DrawMesh.png" />
+    <Content Include="Mesh\ConditionEditor\Icons\Icon.ico" />
+    <Content Include="Mesh\ConditionEditor\Icons\Icon.png" />
+    <Content Include="Mesh\ConditionEditor\Icons\initConditions.png" />
+    <Content Include="Mesh\ConditionEditor\Icons\mesh.png" />
+    <Content Include="Mesh\ConditionEditor\Icons\move.png" />
+    <Content Include="Mesh\ConditionEditor\Icons\pencil.png" />
+    <Content Include="Mesh\ConditionEditor\Icons\rect.png" />
+    <Content Include="Mesh\ConditionEditor\Icons\redo.png" />
+    <Content Include="Mesh\ConditionEditor\Icons\undo.png" />
+    <Content Include="Resources\boundaryConditions.png" />
+    <Content Include="Resources\clear.png" />
+    <Content Include="Resources\DrawMesh.png" />
+    <Content Include="Resources\Icon.ico" />
+    <Content Include="Resources\Icon.png" />
+    <Content Include="Resources\initConditions.png" />
+    <Content Include="Resources\mesh.png" />
+    <Content Include="Resources\move.png" />
+    <Content Include="Resources\pencil.png" />
+    <Content Include="Resources\rect.png" />
+    <Content Include="Resources\redo.png" />
+    <Content Include="Resources\undo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Mesh" />
+    <Folder Include="Mesh\ConditionEditor" />
+    <Folder Include="Mesh\ConditionEditor\Icons" />
+    <Folder Include="Mesh\Generation" />
+    <Folder Include="Resources" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+</Project>
