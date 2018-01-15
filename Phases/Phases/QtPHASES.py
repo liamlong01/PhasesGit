@@ -6,32 +6,31 @@
 
 
 
-from __future__ import unicode_literals
+from __future__ import unicode_literals #p lib
 
 
 
-import sys
-import os
+import sys #python library
+import os #python libraries
 
-import mplCanvas
+import mplCanvas #calls mplcanvas
 
-from PyQt5 import QtGui, QtCore, QtWidgets
+from PyQt5 import QtGui, QtCore, QtWidgets #p lib for gui codes
 
-from Mesh.ConditionEditor.MeshEditor import MeshEditor
+from Mesh.ConditionEditor.MeshEditor import MeshEditor #calling mesheditor class from mesheditor file in mesh/conditioneditor folders
 from Mesh.Generation.MeshGenerator import MeshGenerator
-import Mesh.Mesh as Mesh
+import Mesh.Mesh as Mesh #calling mesh file from mesh folder
 
 progname = os.path.basename(sys.argv[0])
 progversion = "0.1"
 
-stepDefault = 5
 
 
-from PhasesController import PhasesController
+from PhasesController import PhasesController #calling class from file
 from PlotController import PlotController
 
 
-global app_path 
+global app_path #file mgt
 app_path = os.path.dirname(os.path.realpath('__file__'))
 
 class fileInputDialog(QtWidgets.QDialog):
@@ -112,13 +111,20 @@ For detailed information regarding file formats pleases refer to ____.docx """)
         Executes the dialog. Emits and returns specified files if ok.
         Does nothing if user quits dialog or hits cancel.
         """
-        if  self.exec():
+        if  self.exec(): #ok button clicked
+            for file in self.tempfiles:
+                print(self.tempfiles[file])
+                if not os.path.exists(self.tempfiles[file]):
+                    print('error here')
+                    errBox = QtWidgets.QErrorMessage(parent = self)
+                    errBox.showMessage('File path %s  does not exist' %file)
+                    return None
             self.newFiles_Specified.emit(self.tempfiles)
             return self.tempfiles
         else:
-            return None
+            return None #ok button clicked
 
-    def addProject(self, filetype, file):
+    def addProject(self, filetype, file): # definetext files path
         """
         When a project text file is added by the user this will
         automatically populate the other files as specified by the 

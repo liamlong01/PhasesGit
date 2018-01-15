@@ -78,7 +78,7 @@ class MeshEditor(QWidget):
         
         
         
-    def setMesh(self, mesh):
+    def setMesh(self, mesh): # defines scale and position for drawing mesh
         """
         Sets this widget's mesh and performs the necessary calculations for when the mesh is changed.
         """

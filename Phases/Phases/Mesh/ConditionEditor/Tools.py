@@ -6,7 +6,7 @@ from PyQt5.QtCore import *
 import Mesh.Mesh as Mesh
 
 import os
-import numpy as np
+
 
 class Scale(object):
     
@@ -468,36 +468,11 @@ class ICEditTool(DisplayTool):
         divides an element into 4 smaller pieces.
         currently only works with rectangular elements
         """
-        mesh =    self.parent().parent().mesh.subElement(element)
-
         for element in elements:
             maxX = element.nodes[0].x
             minX = element.nodes[0].x
             maxY = element.nodes[0].y
             minY = element.nodes[0].y
-
-
-            # new code
-            centreX = np.mean(element.nodes.x)
-            centreY = np.mean(element.nodes.y)
-            centreNode = Mesh.Node(centreX,centreY)
-            centreNode = mesh.addNode(centreNode)
-
-            newNodes = np.zeros(4)
-            for i in range(4):
-                newX = np.mean(element.nodes[i:i+1].x)
-                newY = np.mean(element.nodes[i:i+1].y)
-                newNodes[i] = Mesh.Node(newX,newY)
-                newNodes[i] = mesh.addNode(newNode)
-
-            for i in range(4):
-                newElement = Mesh.Element([element.nodes[i]], newNodes[i], centreNode,newnodes[i-1])
-                mesh.addElement(newElement)
-
-
-            #/new code
-
-
             for node in element.nodes:
                 if node.x > maxX:
                     maxX=node.x
