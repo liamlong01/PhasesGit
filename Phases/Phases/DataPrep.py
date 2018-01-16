@@ -133,6 +133,7 @@ def boundaryF(file_directory,elbon):
     uv_b=[]
     vv_b=[]
 
+
     for elemt in wholefb[0:elbon]:
       
         new_array4=elemt.split(',') 
@@ -156,7 +157,7 @@ def boundaryF(file_directory,elbon):
         vv_b.append(set4.split(','))  
     boundf.close() 
     #print(concen_b,'\n',temp_b,'\n',uv_b,'\n',vv_b)
-    return bnodes_surf,ele_surf,concen_b,temp_b,uv_b,vv_b 
+    return bnodes_surf,ele_surf,concen_b,temp_b,uv_b,vv_b
     
 
 #Read intial condition files and saves data in new arrays. 
@@ -209,8 +210,8 @@ def sampleF(file_directory):
     wholefsam=samplef.readlines() 
     param={} 
     param['se']=float(wholefsam[0]) #  there are 3 main solution blocks in cntrl, C(concentration equation), T (temperature) and U/V/P (velocities/ pressures),
-		# se indicates which block is solved, numbered 1,2,3 or 4 (all together), Options: 
-		#se = 1(C), 2(T), 3(UVP), 12(CT), 13(CUVP), 23(TUVP), 4(CTUVP)
+# se indicates which block is solved, numbered 1,2,3 or 4 (all together), Options: 
+#se = 1(C), 2(T), 3(UVP), 12(CT), 13(CUVP), 23(TUVP), 4(CTUVP)
     param['ao']=float(wholefsam[1]) # an addition capability of droplet flows was added later, ao = 2 means that the droplet flow solver is added, use ao = 1 (without droplets)
     param['tk']=float(wholefsam[2]) #number of times cycling through the temperature equation loop until a convergence tolerance is reached 
     param['tvk']=float(wholefsam[3]) # same as tk, but instead the number of time through the temperature/velocity loop 

@@ -325,6 +325,9 @@ class RectGenerator(QWidget):
         
         mesh.nx = nx
         mesh.ny = ny
+
+        mesh.dy = self.dy
+        mesh.dx = self.dx
         self.meshCreated.emit(mesh)
 
                 
