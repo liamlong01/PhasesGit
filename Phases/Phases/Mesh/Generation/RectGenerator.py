@@ -97,9 +97,15 @@ class RectGenerator(QWidget): #defines gui layout rectangle
         generate = QGroupBox('Generate')
         genLayout = QGridLayout(generate)
 
+        ranMesh = QCheckBox('Randomize Mesh')
+        genLayout.addWidget(ranMesh,0,0)
+        self.randomMesh = lambda: ranMesh.checkState()
+
         genNodes = QPushButton('Generate')
-        genLayout.addWidget(genNodes,0,0)
+        genLayout.addWidget(genNodes,1,0)
         genNodes.clicked.connect(self.generateNodes)
+
+
      
 
         layout.addWidget(res) # defines element size, dx and dy
@@ -327,10 +333,12 @@ class RectGenerator(QWidget): #defines gui layout rectangle
         
         mesh.nx = nx
         mesh.ny = ny
-        for node in mesh.nodes:
-            print("nodes nudges")
-            node.nudge(self.dx(), self.dy())
-            print("nodes nudges")
+        if self.randomMesh():
+            for node in mesh.nodes:
+                node.nudge(self.dx(), self.dy())
+        else:
+            mesh.dx = self.dx()
+            mesh.dy = self.dy()
 		#reSkew = True	
 		#while reSkew:
 		#	reSkew = False

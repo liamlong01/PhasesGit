@@ -5,11 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{9cde06e6-9a81-4184-859d-cb84337f1f8d}</ProjectGuid>
     <ProjectHome />
-<<<<<<< HEAD
     <StartupFile>Phases\QtPHASES.py</StartupFile>
-=======
-    <StartupFile />
->>>>>>> fdf5364399fcb48e107ad9c8f1bed2827feb9440
     <SearchPath />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -32,7 +28,6 @@
     <Compile Include="Phases\Mesh\Generation\MeshGenerator.py" />
     <Compile Include="Phases\Mesh\Generation\NodeGenerator.py" />
     <Compile Include="Phases\Mesh\Generation\RectGenerator.py" />
-    <Compile Include="Phases\Mesh\Generation\RectGenerator_entropy.py" />
     <Compile Include="Phases\Mesh\Generation\__init__.py" />
     <Compile Include="Phases\Mesh\Mesh.py" />
     <Compile Include="Phases\Mesh\Mesh_orig.py" />
