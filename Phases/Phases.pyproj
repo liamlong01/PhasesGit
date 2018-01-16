@@ -5,7 +5,11 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{9cde06e6-9a81-4184-859d-cb84337f1f8d}</ProjectGuid>
     <ProjectHome />
+<<<<<<< HEAD
     <StartupFile>Phases\QtPHASES.py</StartupFile>
+=======
+    <StartupFile />
+>>>>>>> fdf5364399fcb48e107ad9c8f1bed2827feb9440
     <SearchPath />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
