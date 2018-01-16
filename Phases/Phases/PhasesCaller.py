@@ -18,9 +18,9 @@ class PhasesCaller():
         #right now there is only windows support for both 32 and 64-bit
         if platform.system() == 'Windows':
             if platform.architecture()[0] == '64bit':
-                self.dll = WinDLL('Resources/phases64.dll')
+                self.dll = WinDLL('Phases/Resources/phases64.dll')
             elif platform.architecture()[0] =='32bit':
-                self.dll = WinDLL('Resources/phases32.dll')
+                self.dll = WinDLL('Phases/Resources/phases32.dll')
         
 
         self.fileData = self.dll['Pyfiledata']

@@ -11,8 +11,8 @@ Created on Thu Jul 28 14:20:40 2016
 
 @author: ljl432
 """
-import Phases.DataPrep
-import Phases.PhasesCaller
+import Phases.DataPrep as DataPrep
+import Phases.PhasesCaller as PhasesCaller
 import numpy as np
 from math import sqrt
 from copy import deepcopy
