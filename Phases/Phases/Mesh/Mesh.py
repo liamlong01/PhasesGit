@@ -732,8 +732,8 @@ class Node(object):
         self.pressure =[]
         self.liquidFrac=[]
         self.entropy = []
-		
-	def nudge(self, dx, dy):
+    
+    def nudge(self, dx, dy):
         if not self.isBoundary:
             self.x = self.x + random()*dx/2 - dx/4
             self.y = self.y + random()*dy/2 - dy/4
