@@ -10,7 +10,7 @@ from .RectGenerator import RectGenerator
 
 from math import log
 
-from Mesh.Mesh import Mesh  
+from Phases.Mesh.Mesh import Mesh  
 
 class MeshGenerator(QWidget):
 

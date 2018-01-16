@@ -1,5 +1,5 @@
 ﻿#!/usr/bin/env python
-""""
+"""
 An old prototype which was being designed to allow the user to draw a mesh directly.
 The current mesh generator is a much simpler implementation for the user, and much easier to program as well.
 
@@ -8,7 +8,7 @@ This file never gets imported and nothing here is currently used by any other fi
 but it's kept here in case something becomes useful later on.
 for example the NewSpanningTree class may prove to be useful in mesh generation techniques.
 
-""""
+"""
 
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *

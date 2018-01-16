@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from PyQt5.QtCore import * #gui
-from Mesh import Mesh  #keep track of elements, nodes and boundaries
+from Phases.Mesh import Mesh  #keep track of elements, nodes and boundaries
 from PyQt5.QtGui import * #gui
 from PyQt5.QtWidgets import * #gui
 
@@ -327,12 +327,10 @@ class RectGenerator(QWidget): #defines gui layout rectangle
         
         mesh.nx = nx
         mesh.ny = ny
-		
         for node in mesh.nodes:
             print("nodes nudges")
             node.nudge(self.dx(), self.dy())
-			
-        print("nodes nudges")
+            print("nodes nudges")
 		#reSkew = True	
 		#while reSkew:
 		#	reSkew = False
@@ -343,7 +341,7 @@ class RectGenerator(QWidget): #defines gui layout rectangle
 		#				node.nudge()
 		#				if not elem.badSkew():
 		#					break
-			
+		#					
         self.meshCreated.emit(mesh)
 
                 

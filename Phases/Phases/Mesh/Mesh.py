@@ -11,11 +11,12 @@ Created on Thu Jul 28 14:20:40 2016
 
 @author: ljl432
 """
-import DataPrep
-import PhasesCaller
+import Phases.DataPrep
+import Phases.PhasesCaller
 import numpy as np
 from math import sqrt
 from copy import deepcopy
+from random import random
 
 def loadMeshFromFile(files):
     """
@@ -732,8 +733,8 @@ class Node(object):
         self.pressure =[]
         self.liquidFrac=[]
         self.entropy = []
-		
-	def nudge(self, dx, dy):
+
+    def nudge(self, dx, dy):
         if not self.isBoundary:
             self.x = self.x + random()*dx/2 - dx/4
             self.y = self.y + random()*dy/2 - dy/4

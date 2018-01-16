@@ -11,8 +11,8 @@ Created on Thu Jul 28 14:20:40 2016
 
 @author: ljl432
 """
-import DataPrep
-import PhasesCaller
+import Phases.DataPrep
+import Phases.PhasesCaller
 import numpy as np
 from math import sqrt
 from copy import deepcopy
@@ -28,8 +28,7 @@ def loadMeshFromFile(files):
     
     mesh = Mesh()
     mesh.params = DataPrep.sampleF(files['Project'])
-    
-	
+
     anodes,aelem,nbon1,nbon2,nbon3,nbon4,elbon,elems,xy = DataPrep.meshF(files['Mesh'])
     bnodes_surf,ele_surf,concen_b,temp_b,uv_b,vv_b = DataPrep.boundaryF(files['Boundary Conditions'], elbon)
     ic_con,ic_temp,ic_uv,ic_vv = DataPrep.initialconF(files['Initial Conditions'], aelem)

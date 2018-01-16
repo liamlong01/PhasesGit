@@ -3,7 +3,7 @@ from matplotlib import cm
 import numpy as np 
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
- """
+"""
  protoype graphing functions
  When implemented in the final application
  they should be used within an mplCanvas.PlotType class

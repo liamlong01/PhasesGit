@@ -6,6 +6,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
 import numpy as np
+from random import random
 
 class Rectangle(object):
   
