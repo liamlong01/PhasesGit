@@ -14,7 +14,7 @@ Created on Thu Jul 28 14:20:40 2016
 import Phases.DataPrep as DataPrep
 import Phases.PhasesCaller as PhasesCaller
 import numpy as np
-from math import sqrt
+from math import sqrt,floor
 from copy import deepcopy
 from random import random
 
@@ -41,6 +41,8 @@ def loadMeshFromFile(files):
     mesh.nx = nbon3
     mesh.ny = nbon4
 
+    mesh.dx = np.max(xy[:,0])/mesh.nx
+    mesh.dy = np.max(xy[:,1])/mesh.ny
     
     for coords in xy:   #xy is structured as a list of lists: 
         newNode = (Node(coords[0],coords[1]))
@@ -420,7 +422,7 @@ class Mesh(object):
             temp[node.index-1] = node.temperature[timeStep-1]
         return self.split(temp)
 
-    def getUV(self,timeStep):
+    def getUV(self,timeStep,split = True):
         """
         Returns the u-Velocity and v-Velocity values of the mesh’s nodal points 
         at the given timeStep as a two 2D numpy arrays.
@@ -430,8 +432,9 @@ class Mesh(object):
         for node in self.nodes:
             u[node.index-1] = node.uVelocity[timeStep-1]
             v[node.index-1] = node.vVelocity[timeStep-1]
-            
+         
         return  self.split(u), self.split(v)
+     
 
     def getFLIQ(self,timeStep):
         """
@@ -471,23 +474,24 @@ class Mesh(object):
     def calcEntropy(self):
         if self.dx is not None and self.dy is not None:
            
-            for i in range(1,self.params['tstep']+1):
+            for i in range(1,int(self.params['tstp'])+1):
                 u,v = self.getUV(i);
             
-                gradU = np.gradient(u,[self.dx, self.dy])
-                dudy = gradU(2)
+                [dudx, dudy] = np.gradient(u,self.dx, self.dy)
                 
-                gradV = np.gradient(v,[self.dx, self.dy])
-                dvdx = gradV(1)
+                
+                [dvdx, dvdy]  = np.gradient(v,self.dx, self.dy)
+                
           
                 mu = self.params['vsc']*self.params['prl']
 
                 T = self.getTemperature(i)
                 entropy = mu*np.divide((np.multiply(dudy,dudy)+np.multiply(dvdx,dvdx)) , np.multiply(T,T))
                
-                for j in range(length(entropy)):
-                    print(entropy[j])
-                    self.nodes[j].entropy[i-1] = entropy[j]
+                for j in range(len(self.nodes)):
+                  
+                    print(entropy[j%self.ny,floor(j/self.ny)])
+                    self.nodes[j].entropy.append(entropy[j%self.ny,floor(j/self.ny)])
             
             
     def sendToAdda(self):
@@ -635,6 +639,7 @@ class Mesh(object):
         self.vVelRange = []
         self.velMagRange = []
         self.pressureRange = []
+    
     
         for i in range(int(self.params['tstp'])):
             Adda(0, i+1, 1, 1, 1)
