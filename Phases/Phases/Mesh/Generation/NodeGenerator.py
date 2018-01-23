@@ -3,7 +3,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
-from Mesh.Mesh import Node
+from Phases.Mesh.Mesh import Node
   
 
 class NodeGenerator(QWidget):

@@ -3,7 +3,7 @@
 from PyQt5 import QtCore, QtWidgets
 
 
-from mplCanvas import PlotType
+from Phases.mplCanvas import PlotType
 
 stepDefault = 5
 

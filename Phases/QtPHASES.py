@@ -13,21 +13,21 @@ from __future__ import unicode_literals #p lib
 import sys #python library
 import os #python libraries
 
-import mplCanvas #calls mplcanvas
+import Phases.mplCanvas as mplCanvas #calls mplcanvas
 
 from PyQt5 import QtGui, QtCore, QtWidgets #p lib for gui codes
 
-from Mesh.ConditionEditor.MeshEditor import MeshEditor #calling mesheditor class from mesheditor file in mesh/conditioneditor folders
-from Mesh.Generation.MeshGenerator import MeshGenerator
-import Mesh.Mesh as Mesh #calling mesh file from mesh folder
+from Phases.Mesh.ConditionEditor.MeshEditor import MeshEditor #calling mesheditor class from mesheditor file in mesh/conditioneditor folders
+from Phases.Mesh.Generation.MeshGenerator import MeshGenerator
+import Phases.Mesh.Mesh as Mesh #calling mesh file from mesh folder
 
 progname = os.path.basename(sys.argv[0])
 progversion = "0.1"
 
 
 
-from PhasesController import PhasesController #calling class from file
-from PlotController import PlotController
+from Phases.PhasesController import PhasesController #calling class from file
+from Phases.PlotController import PlotController
 
 
 global app_path #file mgt
