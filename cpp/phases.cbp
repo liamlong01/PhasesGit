@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="phases" />
+		<Option pch_mode="2" />
+		<Option compiler="msvc10" />
+		<Build>
+			<Target title="Debug Win32">
+				<Option output="Debug/phases" prefix_auto="1" extension_auto="1" />
+				<Option object_output="Debug" />
+				<Option type="1" />
+				<Option compiler="msvc10" />
+				<Compiler>
+					<Add option="/DWIN32" />
+					<Add option="/D_DEBUG" />
+					<Add option="/D_CONSOLE" />
+					<Add option="/W3" />
+					<Add option="/ZI" />
+					<Add option="/Od" />
+					<Add option="/Wp64" />
+					<Add option="/Gm" />
+					<Add option="/MLd" />
+				</Compiler>
+				<Linker>
+					<Add option="/debug" />
+					<Add option="/pdb:Debug\phases.pdb" />
+				</Linker>
+			</Target>
+			<Target title="Release Win32">
+				<Option output="Release/phases" prefix_auto="1" extension_auto="1" />
+				<Option object_output="Release" />
+				<Option type="1" />
+				<Option compiler="msvc10" />
+				<Compiler>
+					<Add option="/DWIN32" />
+					<Add option="/DNDEBUG" />
+					<Add option="/D_CONSOLE" />
+					<Add option="/W3" />
+					<Add option="/Zi" />
+					<Add option="/Ob1" />
+					<Add option="/O2" />
+					<Add option="/Wp64" />
+					<Add option="/ML" />
+				</Compiler>
+				<Linker>
+					<Add option="/debug" />
+					<Add option="/INCREMENTAL:NO" />
+				</Linker>
+			</Target>
+		</Build>
+		<Unit filename="Adda.cpp" />
+		<Unit filename="assmbl.cpp" />
+		<Unit filename="bndry.cpp" />
+		<Unit filename="cdcl.cpp" />
+		<Unit filename="cntrl.cpp" />
+		<Unit filename="coeffc.cpp" />
+		<Unit filename="constInit.h" />
+		<Unit filename="custom.cpp" />
+		<Unit filename="dsmooth.cpp" />
+		<Unit filename="entropy.cpp" />
+		<Unit filename="filedata.cpp" />
+		<Unit filename="forbak.cpp" />
+		<Unit filename="functInit.h" />
+		<Unit filename="genul.cpp" />
+		<Unit filename="initdt.cpp" />
+		<Unit filename="ipoint.cpp" />
+		<Unit filename="nullmx.cpp" />
+		<Unit filename="phase.cpp" />
+		<Unit filename="phase3.cpp" />
+		<Unit filename="phases.cpp" />
+		<Unit filename="shape.cpp" />
+		<Unit filename="stiffc.cpp" />
+		<Unit filename="stiffdc.cpp" />
+		<Unit filename="stiffdv.cpp" />
+		<Unit filename="stiffp.cpp" />
+		<Unit filename="stifft.cpp" />
+		<Unit filename="stiffu.cpp" />
+		<Unit filename="stiffv.cpp" />
+		<Unit filename="temporary.cpp" />
+		<Unit filename="uvcor.cpp" />
+		<Unit filename="variaExtern.h" />
+		<Unit filename="variaInit.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
