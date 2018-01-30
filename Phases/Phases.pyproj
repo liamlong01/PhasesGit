@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{9cde06e6-9a81-4184-859d-cb84337f1f8d}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>Phases\QtPHASES.py</StartupFile>
+    <StartupFile>QtPHASES.py</StartupFile>
     <SearchPath />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -37,9 +37,9 @@
     <Compile Include="Phases\PhasesCaller.py" />
     <Compile Include="Phases\PhasesController.py" />
     <Compile Include="Phases\PlotController.py" />
-    <Compile Include="Phases\QtPHASES.py" />
     <Compile Include="Phases\setup.py" />
     <Compile Include="Phases\__init__.py" />
+    <Compile Include="QtPHASES.py" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Phases\Mesh\ConditionEditor\Icons\boundaryConditions.png" />

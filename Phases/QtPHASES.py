@@ -138,12 +138,14 @@ For detailed information regarding file formats pleases refer to ____.docx """)
         
         if filetype != 'Project':
             return
-  
+        dir_path = file.split('/')[:-1]
+        dir_path = '/'.join(dir_path)+'/'
         # open and read file
         prj = open(file,'r')
         Files =[]
         for line in prj.readlines()[-7:]:   # the last 7 lines should contain all file directories
-            Files.append(line.strip('\n'))  # also getting rid of pesky '\n' at end of lines
+            fileName = dir_path + line.strip('\n')
+            Files.append(fileName)  # also getting rid of pesky '\n' at end of lines
        
 
         # finding the files 
