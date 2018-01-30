@@ -28,10 +28,10 @@
 10000
 0
 1
-C:\Users\ljl432\Documents\SpyderPhases\Resources\prj2\sample2.prj
-C:\Users\ljl432\Documents\SpyderPhases\Resources\prj2\mesh2.dat
-C:\Users\ljl432\Documents\SpyderPhases\Resources\prj2\ic2.dat
-C:\Users\ljl432\Documents\SpyderPhases\Resources\prj2\bc2.dat
-C:\Users\ljl432\Documents\SpyderPhases\Resources\prj2\output2.dat
-C:\Users\ljl432\Documents\SpyderPhases\Resources\prj2\batch2.dat
-C:\Users\ljl432\Documents\SpyderPhases\Resources\prj2\custom2.dat
+sample2.prj
+mesh2.dat
+ic2.dat
+bc2.dat
+output2.dat
+batch2.dat
+custom2.dat

@@ -28,10 +28,10 @@
 10000
 0
 2
-C:\Users\ljl432\Documents\JustPython\PHASES\PHASESGUI\Resources\prj10\samp10.prj
-C:\Users\ljl432\Documents\JustPython\PHASES\PHASESGUI\Resources\prj10\mesh10.dat
-C:\Users\ljl432\Documents\JustPython\PHASES\PHASESGUI\Resources\prj10\ic10.dat
-C:\Users\ljl432\Documents\JustPython\PHASES\PHASESGUI\Resources\prj10\bc10.dat
-C:\Users\ljl432\Documents\JustPython\PHASES\PHASESGUI\Resources\prj10\output10.dat
-C:\Users\ljl432\Documents\JustPython\PHASES\PHASESGUI\Resources\prj10\batch10.dat
-C:\Users\ljl432\Documents\JustPython\PHASES\PHASESGUI\Resources\prj10\cust10.dat
+samp10.prj
+mesh10.dat
+ic10.dat
+bc10.dat
+output10.dat
+batch10.dat
+cust10.dat

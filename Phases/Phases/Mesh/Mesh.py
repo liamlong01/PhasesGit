@@ -219,7 +219,7 @@ def saveMeshToFile(mesh,directory,name):
           
             
             try:
-                outputFile.write('%s,%s,%s,%s,%s,%s,%s,%s,%s, %s\n'%(node.index,
+                outputFile.write('%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n'%(node.index,
                                                              node.temperature[i],
                                                              node.concentration[i],
                                                              mesh.params['prl'],

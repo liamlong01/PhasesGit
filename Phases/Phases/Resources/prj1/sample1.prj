@@ -28,10 +28,10 @@
 310000
 0
 1
-D:\Documents\Phases\Phases\Resources\prj1\sample1.prj
-D:\Documents\Phases\Phases\Resources\prj1\mesh1.dat
-D:\Documents\Phases\Phases\Resources\prj1\ic1.dat
-D:\Documents\Phases\Phases\Resources\prj1\bc1.dat
-D:\Documents\Phases\Phases\Resources\prj1\output1.dat
-D:\Documents\Phases\Phases\Resources\prj1\batch1.dat
-D:\Documents\Phases\Phases\Resources\prj1\custom1.dat
+sample1.prj
+mesh1.dat
+ic1.dat
+bc1.dat
+output1.dat
+batch1.dat
+custom1.dat

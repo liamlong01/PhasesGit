@@ -54,12 +54,14 @@ def outputF(file_directory,anodes,i):
     
     fsol  = wholefsol[:,7]
     fliq  = wholefsol[:,8]
+
+    entropy = wholefsol[:,9]
     
         
     solution_file.close()
     
     #print(nodes,'\n',uv) # temp,'\n', concen,'\n',rho,'\n', uvel,'\n', vvel, '\n', wvel,'\n', fsol,'\n', fliq)
-    return nodes,temp,concen,rho,uvel,vvel,wvel,fsol,fliq,uv
+    return nodes,temp,concen,rho,uvel,vvel,wvel,fsol,fliq,uv,entropy
     
     
 #Reads mesh files and stores data in new arrays. Returns mesh arrays and important data such as # of nodes in a mesh and a 2d array of x-y coordinates. 
