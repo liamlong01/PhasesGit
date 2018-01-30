@@ -243,7 +243,7 @@ def sampleF(file_directory):
     
     if param['ur'] == 0:
         param['ur'] = param['pkl']/(param['prl']*param['phl']*param['lr'])
-    param['df'] =param['df']/(param['lr']/param['ur'])
+    param['df'] = param['df']/(param['lr']/param['ur'])
     
     
     return param

@@ -28,10 +28,10 @@
 59023
 0
 1
-D:\Documents\PhasesGit\Phases\Phases\Resources\prj3\sample3.prj
-D:\Documents\PhasesGit\Phases\Phases\Resources\prj3\mesh3.dat
-D:\Documents\PhasesGit\Phases\Phases\Resources\prj3\ic3.dat
-D:\Documents\PhasesGit\Phases\Phases\Resources\prj3\bc3.dat
-D:\Documents\PhasesGit\Phases\Phases\Resources\prj3\output3.dat
-D:\Documents\PhasesGit\Phases\Phases\Resources\prj3\batch3.dat
-D:\Documents\PhasesGit\Phases\Phases\Resources\prj3\custom3.dat
+sample3.prj
+mesh3.dat
+ic3.dat
+bc3.dat
+output3.dat
+batch3.dat
+custom3.dat

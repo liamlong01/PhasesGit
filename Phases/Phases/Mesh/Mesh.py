@@ -128,13 +128,13 @@ def saveMeshToFile(mesh,directory,name):
     prj.write('1\n')
 
     #writing file names
-    prj.write(directory + '\\%s.prj\n'%name)
-    prj.write(directory + '\\mesh_%s.dat\n'%name)
-    prj.write(directory + '\\ic_%s.dat\n'%name)
-    prj.write(directory + '\\bc_%s.dat\n'%name)
-    prj.write(directory + '\\output_%s.dat\n'%name)
-    prj.write(directory + '\\batch_%s.dat\n'%name)
-    prj.write(directory + '\\custum_%s.dat\n'%name)
+    prj.write('%s.prj\n'%name)
+    prj.write('mesh_%s.dat\n'%name)
+    prj.write('ic_%s.dat\n'%name)
+    prj.write('bc_%s.dat\n'%name)
+    prj.write('output_%s.dat\n'%name)
+    prj.write('batch_%s.dat\n'%name)
+    prj.write('custum_%s.dat\n'%name)
     
     prj.close()
     
