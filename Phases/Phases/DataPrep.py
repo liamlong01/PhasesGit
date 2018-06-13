@@ -243,9 +243,9 @@ def sampleF(file_directory):
     param['pl']=float(wholefsam[27]) #latent heat of fusion
     samplef.close() 
     
-    if param['ur'] == 0:
-        param['ur'] = param['pkl']/(param['prl']*param['phl']*param['lr'])
-    param['df'] = param['df']/(param['lr']/param['ur'])
+    #if param['ur'] == 0:
+    #    param['ur'] = param['pkl']/(param['prl']*param['phl']*param['lr'])
+    #param['df'] = param['df']/(param['lr']/param['ur'])
     
     
     return param

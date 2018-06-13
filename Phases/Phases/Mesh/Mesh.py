@@ -120,7 +120,7 @@ def saveMeshToFile(mesh,directory,name):
    
     prj = open(directory + '\\%s.prj'%name, 'w')
     actualdf = mesh.params['df']
-    mesh.params['df'] = mesh.params['df']*mesh.params['lr']/mesh.params['ur']
+   # mesh.params['df'] = mesh.params['df']*mesh.params['lr']/mesh.params['ur']
     #writing parameters
     orderOfParams = ['se','ao','tk','tvk','tstp','df','lr','wr','tol','ur','pcs','pcl','tmlt','tsol','bt','bs','tmin','tmax','vsc','prs','prl','pds0','pdl0','pks','pkl','phs','phl','pl']
     for param in orderOfParams:
@@ -504,6 +504,7 @@ class Mesh(object):
 
         if self.params['ur'] == 0:
 			self.params['ur'] = self.params['pkl']/(self.params['prl']*self.params['phl']*self.params['lr'])
+		param['df'] = param['df']/(param['lr']/param['ur'])
         
         self.ny, self.nx = X.shape #shape returns the number of rows and the number of columns in the X array
             
