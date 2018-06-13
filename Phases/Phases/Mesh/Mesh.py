@@ -130,12 +130,12 @@ def saveMeshToFile(mesh,directory,name):
 
     #writing file names
     prj.write('%s.prj\n'%name)
-    prj.write('mesh_%s.dat\n'%name)
-    prj.write('ic_%s.dat\n'%name)
-    prj.write('bc_%s.dat\n'%name)
-    prj.write('output_%s.dat\n'%name)
-    prj.write('batch_%s.dat\n'%name)
-    prj.write('custum_%s.dat\n'%name)
+    prj.write('%s_mesh.dat\n'%name)
+    prj.write('%s_ic.dat\n'%name)
+    prj.write('%s_bc.dat\n'%name)
+    prj.write('%s_output.dat\n'%name)
+    prj.write('%s_batch.dat\n'%name)
+    prj.write('%s_custom.dat\n'%name)
     
     prj.close()
 
@@ -143,7 +143,7 @@ def saveMeshToFile(mesh,directory,name):
     
  
     ###### write to mesh file
-    meshFile = open(directory + '\\mesh_%s.dat'%name, 'w')
+    meshFile = open(directory + '\\%s_mesh.dat'%name, 'w')
    
     # first line states the #nodes #elements, dimensions, #boundaries
     firstLine = '%s,%s,%s,%s,%s,%s,%s\n' %(len(mesh.nodes),len(mesh.elements),mesh.nx,mesh.ny,mesh.nx,mesh.ny,len(mesh.boundaries))
@@ -164,7 +164,7 @@ def saveMeshToFile(mesh,directory,name):
     
     
     ##### write to boundary conditions file
-    bcFile = open(directory + '\\bc_%s.dat'%name, 'w')
+    bcFile = open(directory + '\\%s_bc.dat'%name, 'w')
     
     # writing boundary nodes
     for boundary in mesh.boundaries:
@@ -195,7 +195,7 @@ def saveMeshToFile(mesh,directory,name):
     bcFile.close()
     
     #write to initial conditions file
-    icFile= open(directory + '\\ic_%s.dat'%name, 'w')
+    icFile= open(directory + '\\%s_ic.dat'%name, 'w')
     
     def writeInitial(key):
         for element in mesh.elements:
@@ -214,7 +214,7 @@ def saveMeshToFile(mesh,directory,name):
     icFile.close()
     
     #write to output file
-    outputFile = open(directory + '\\output_%s.dat'%name, 'w')
+    outputFile = open(directory + '\\%s_output.dat'%name, 'w')
     
     
     for i in range(int(mesh.params['tstp'])):
