@@ -734,7 +734,7 @@ class Node(object):
         Resets and clears the output data of this node
         """
         self.temperature = []
-        self.concentation = []
+        self.concentration = []
         self.uVelocity =[]
         self.vVelocity =[]
         self.wVelocity=[]
