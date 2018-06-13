@@ -506,7 +506,7 @@ class Mesh(object):
 
             self.params['ur'] = self.params['pkl']/(self.params['prl']*self.params['phl']*self.params['lr'])
 
-		actualdf = self.params['df']/(self.params['lr']/self.params['ur'])
+        actualdf = self.params['df']/(self.params['lr']/self.params['ur'])
         self.ny, self.nx = X.shape #shape returns the number of rows and the number of columns in the X array
             
         
