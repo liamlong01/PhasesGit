@@ -506,7 +506,7 @@ class Mesh(object):
 
             self.params['ur'] = self.params['pkl']/(self.params['prl']*self.params['phl']*self.params['lr'])
 
-		self.params['df'] = self.params['df']/(self.params['lr']/self.params['ur'])
+        actualdf = self.params['df']/(self.params['lr']/self.params['ur'])
         self.ny, self.nx = X.shape #shape returns the number of rows and the number of columns in the X array
             
         
@@ -526,7 +526,7 @@ class Mesh(object):
         Adda(3, 1, 1, 1, self.params['tk'])
         Adda(4, 1, 1, 1, self.params['tvk'])
         Adda(5, 1, 1, 1, self.params['tstp'])
-        Adda(6, 1, 1, 1, self.params['df'])
+        Adda(6, 1, 1, 1, actualdf)
         Adda(7, 1, 1, 1, self.params['lr'])
         Adda(8, 1, 1, 1, self.params['wr'])
         Adda(9, 1, 1, 1, self.params['tol'])
