@@ -102,11 +102,11 @@ def loadMeshFromFile(files):
 
     addInitialConditions('concentration',ic_con,1,0)
     
-    faca = 1/(mesh.params['tmax']-mesh.params['tmin'] +1e-32)
-    facb = -mesh.params['tmin']/(mesh.params['tmax']-mesh.params['tmin'] +1e-32)
+    faca = 1
+    facb = 0
     addInitialConditions('temperature',ic_temp,faca,facb)
     
-    faca = 1/(mesh.params['ur']+1e-32)
+    faca = 1
     addInitialConditions('u-velocity',ic_uv,faca,0)
     addInitialConditions('v-velocity',ic_vv,faca,0)
     
@@ -122,7 +122,7 @@ def saveMeshToFile(mesh,directory,name):
     actualdf = mesh.params['df']
    # mesh.params['df'] = mesh.params['df']*mesh.params['lr']/mesh.params['ur']
     #writing parameters
-    orderOfParams = ['se','ao','tk','tvk','tstp','df','lr','wr','tol','ur','pcs','pcl','tmlt','tsol','bt','bs','tmin','tmax','vsc','prs','prl','pds0','pdl0','pks','pkl','phs','phl','pl']
+    orderOfParams = ['se','ao','tk','tvk','tstp','df','lr','wr','tol','ur','pcs','pcl','tmlt','tsol','bt','bs','tmin','tmax','vsc','prs','prl','pds0','pdl0','pks','pkl','phs','phl','pl','k']
     for param in orderOfParams:
         prj.write('%s\n'%mesh.params[param])
     prj.write('0\n')
@@ -478,19 +478,25 @@ class Mesh(object):
         if self.dx is not None and self.dy is not None:
            
             for i in range(1,int(self.params['tstp'])+1):
-                u,v = self.getUV(i);
+                u,v = self.getUV(i)
+                T = self.getTemperature(i)
             
                 [dudx, dudy] = np.gradient(u,self.dx, self.dy)
                 
                 
                 [dvdx, dvdy]  = np.gradient(v,self.dx, self.dy)
+
+                [dTdx, dTdy] = np.gradient(T, self.dx, self.dy)
                 
           
                 mu = self.params['vsc']*self.params['prl']
 
-                T = self.getTemperature(i)
+
                 entropy = mu*np.divide((np.multiply(dudy,dudy)+np.multiply(dvdx,dvdx)) , np.multiply(T,T))
-               
+                #entropy2 = self.params['k']*np.divide( (np.multiply(dTdx,dTdx)+np.multiply(dTdy,dTdy)), np.multiply(T,T))
+                #entropy3 = mu*np.divide((np.multiply(dudy+dvdx,dudy+dvdx)+2*np.multiply(dvdy,dvdy) + 2*np.multiply(dudx,dudx)) , T)
+                #entropy = entropy2+entropy3
+
                 for j in range(len(self.nodes)):
                   
                     print(entropy[j%self.ny,floor(j/self.ny)])
@@ -627,11 +633,13 @@ class Mesh(object):
             
             
         #export initial conditions
+        faca = 1 / (self.params['tmax'] - self.params['tmin'] + 1e-32)
+        facb = -self.params['tmin'] / (self.params['tmax'] - self.params['tmin'] + 1e-32)
         for elem in self.elements:
             Adda(51,elem.index,1,1,elem.initialConditions['concentration'])
-            Adda(52,elem.index,1,1,elem.initialConditions['temperature'])
-            Adda(53,elem.index,1,1,elem.initialConditions['u-velocity'])
-            Adda(54,elem.index,1,1,elem.initialConditions['v-velocity'])
+            Adda(52,elem.index,1,1,faca*elem.initialConditions['temperature']+facb)
+            Adda(53,elem.index,1,1,elem.initialConditions['u-velocity']/self.params['ur'])
+            Adda(54,elem.index,1,1,elem.initialConditions['v-velocity']/self.params['ur'])
             
         
         #execute   

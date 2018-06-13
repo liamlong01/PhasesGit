@@ -35,7 +35,8 @@ Options: se = 1(C), 2(T), 3(UVP), 12(CT), 13(CUVP), 23(TUVP), 4(CTUVP)""",
        'pdl0' : 'Fluid diffusivity',
        'phs' : 'Solid specific heat',
        'phl' : 'Fluid specific heat',
-       'pl' : 'Latent heat of fusion'
+       'pl' : 'Latent heat of fusion',
+        'k' : 'Thermal Conductivity'
     }
 
 class PhasesController (QtWidgets.QWidget):
@@ -56,7 +57,7 @@ class PhasesController (QtWidgets.QWidget):
         QtWidgets.QWidget.__init__(self, parent=parent)
         
         #dictionaries are unordered so to have a consistent an order of parameters needs to be defined
-        self.orderOfParams = ['se','ao','tk','tvk','tstp','df','lr','wr','tol','ur','pcs','pcl','tmlt','tsol','bt','bs','tmin','tmax','vsc','prs','prl','pds0','pdl0','pks','pkl','phs','phl','pl']
+        self.orderOfParams = ['se','ao','tk','tvk','tstp','df','lr','wr','tol','ur','pcs','pcl','tmlt','tsol','bt','bs','tmin','tmax','vsc','prs','prl','pds0','pdl0','pks','pkl','phs','phl','pl', 'k']
         
         self.layout = QtWidgets.QFormLayout(self)
         self.inputs = {}
