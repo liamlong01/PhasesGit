@@ -503,7 +503,7 @@ class Mesh(object):
         X, Y = self.getXY()
 
         if self.params['ur'] == 0:
-			self.params['ur'] = self.params['pkl']/(self.params['prl']*self.params['phl']*self.params['lr'])
+            self.params['ur'] = self.params['pkl']/(self.params['prl']*self.params['phl']*self.params['lr'])
         
         self.ny, self.nx = X.shape #shape returns the number of rows and the number of columns in the X array
             
