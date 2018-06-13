@@ -15,8 +15,8 @@ class Rectangle(object): #describes a rectangle
         self.height = height
         self.width = width
         self.edges = edges
-        self.topEdges = [edges[0]]
-        self.leftEdges = [edges[1]]
+        self.topEdges = [edges[1]]
+        self.leftEdges = [edges[0]]
         self.botEdges = [edges[2]]
         self.rightEdges = [edges[3]]
         
@@ -120,8 +120,8 @@ class RectGenerator(QWidget): #defines gui layout rectangle
         node3 = self.nodeEditor.addNode(refX,refY)
         node4 = self.nodeEditor.addNode(refX+width,refY)
 
-        edge1 = self.edgeEditor.addStraightLine(node1,node2)
-        edge2 = self.edgeEditor.addStraightLine(node2,node3)
+        edge2 = self.edgeEditor.addStraightLine(node1,node2)
+        edge1 = self.edgeEditor.addStraightLine(node2,node3)
         edge3 = self.edgeEditor.addStraightLine(node3,node4)
         edge4 = self.edgeEditor.addStraightLine(node4,node1)
 
@@ -231,9 +231,10 @@ class RectGenerator(QWidget): #defines gui layout rectangle
         for rect in self.rectangles:
             nodes =[]
             #making nodes
-            nodex = np.arange(rect.nodes[2].x,round(rect.nodes[0].x+self.dx(),8),self.dx())
-            nodey = np.arange(rect.nodes[2].y,round(rect.nodes[0].y+self.dy(),8),self.dy())
+            nodex = np.arange(round(rect.nodes[2].x,8),round(rect.nodes[0].x+self.dx(),8),self.dx())
+            nodey = np.arange(round(rect.nodes[2].y,8),round(rect.nodes[0].y+self.dy(),8),self.dy())
             for i in range(len(nodex)):
+
                 for j in range(len(nodey)):
                     node = Mesh.Node(nodex[i],nodey[j])
 

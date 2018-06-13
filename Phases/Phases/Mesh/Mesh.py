@@ -83,7 +83,7 @@ def loadMeshFromFile(files):
     addBoundaryConditions('v-velocity',vv_b)
 
     for i in range(len(vv_b)):
-        mesh.boundaries[int(i/2)].orientation = vv_b[3]
+        mesh.boundaries[int(i/2)].orientation = vv_b[i][3]
     
 
     
@@ -119,7 +119,8 @@ def saveMeshToFile(mesh,directory,name):
     
    
     prj = open(directory + '\\%s.prj'%name, 'w')
-    
+    actualdf = mesh.params['df']
+    mesh.params['df'] = mesh.params['df']*mesh.params['lr']/mesh.params['ur']
     #writing parameters
     orderOfParams = ['se','ao','tk','tvk','tstp','df','lr','wr','tol','ur','pcs','pcl','tmlt','tsol','bt','bs','tmin','tmax','vsc','prs','prl','pds0','pdl0','pks','pkl','phs','phl','pl']
     for param in orderOfParams:
@@ -137,6 +138,8 @@ def saveMeshToFile(mesh,directory,name):
     prj.write('custum_%s.dat\n'%name)
     
     prj.close()
+
+    mesh.params['df'] = actualdf
     
  
     ###### write to mesh file
@@ -819,3 +822,17 @@ class Boundary(object):
     def __str__(self):
         return "Boundary object with nodes at (%s,%s),(%s,%s), temperature of %s, index of %s, element index of %s" %(self.nodes[0].x,self.nodes[0].y,self.nodes[1].x,self.nodes[1].y,self.conditions['temperature'],self.index,self.element.index)
       
+    def __lt__(self, otherBound):
+        if self.element.index < otherBound.element.index:
+            return 0
+
+        elif self.element.index < otherBound.element.index:
+            return 1
+
+        else:
+            if self.orientation[1] < otherBound.orientation[1]:
+                return 0
+            elif self.orientation[1] > otherBound.orientation[1]:
+                return 1
+            else:
+                return 0
