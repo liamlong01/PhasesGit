@@ -115,11 +115,16 @@ class RectGenerator(QWidget): #defines gui layout rectangle
         layout.addStretch(3)
 
     def addRectangle(self, refX,refY, height,width):
+        """
+        Adds a rectangle with the specified height and width. refX and refY define the location of the bottom left corner.
+        """
+        #generating the 4 corners of the rectangle in order topright, topleft, bottom left, bottom right
         node1 = self.nodeEditor.addNode(refX+width,refY+height)
         node2 = self.nodeEditor.addNode(refX,refY+height)
         node3 = self.nodeEditor.addNode(refX,refY)
         node4 = self.nodeEditor.addNode(refX+width,refY)
 
+        #generating the four edges of the rectangle in orde of top,right,bottom,left
         edge2 = self.edgeEditor.addStraightLine(node1,node2)
         edge1 = self.edgeEditor.addStraightLine(node2,node3)
         edge3 = self.edgeEditor.addStraightLine(node3,node4)
@@ -129,33 +134,54 @@ class RectGenerator(QWidget): #defines gui layout rectangle
         edges = [edge1, edge2, edge3, edge4]
         for edge in edges:
             edge.setDetail(0)
-
+        
+        #adding the rectangle
         self.rectangles.append(Rectangle(height, width, nodes,edges))
 
+        #if its not the first rectangle, the rectangles will share edges with previous rectangles
+        #this logic determines which edges need to be deleted to merge the two together
         if len(self.rectangles) > 1:
+
+            #deleting right edge of previous rectange and left edge of new recrangle
             self.deleteRectEdge(self.rectangles[-2], self.rectangles[-2].rightEdges[0])
             self.deleteRectEdge(self.rectangles[-1], self.rectangles[-1].leftEdges[0])
 
+
+            #edge connecting top right of previous rect to top left of new rect
             edge = self.edgeEditor.addStraightLine(self.rectangles[-2].nodes[0],self.rectangles[-1].nodes[1])
             edge.setDetail(0)
+
+            #determines which rectangle the new edge belongs to
             if self.rectangles[-2].nodes[0].y > self.rectangles[-1].nodes[1].y:
+                #corner of previous rect is above new rect 
+                #this edge belongs to previous rect
                 self.rectangles[-2].edges.append(edge)
                 self.rectangles[-2].rightEdges.append(edge)
             else:
+                #corner of new rect is above prev rect 
+                #this edge belongs to new rect
                 self.rectangles[-1].edges.append(edge)
                 self.rectangles[-1].leftEdges.append(edge)
-
+            
+            #edge connecting bottom right of previous rect to bottom left of new rect
             edge = self.edgeEditor.addStraightLine(self.rectangles[-2].nodes[3],self.rectangles[-1].nodes[2])
             edge.setDetail(0)
             if self.rectangles[-2].nodes[3].y < self.rectangles[-1].nodes[2].y:
+                #corner of previous rect is below new rect 
+                #this edge belongs to previous rect
                 self.rectangles[-2].edges.append(edge)
                 self.rectangles[-2].rightEdges.append(edge)
             else:
+                #corner of previous rect is above new rect 
+                #this edge belongs to new rect
                 self.rectangles[-1].edges.append(edge)
                 self.rectangles[-1].leftEdges.append(edge)
           
 
     def addNewRectangle(self,height, width):
+        """
+        Adds a new Rectangle to the mesh boundary definition with the specified height and width. The alignment that has been selected is also taken into account.
+        """
 
         #determine if height and width are compatiple with dx and dy
         
@@ -187,7 +213,7 @@ class RectGenerator(QWidget): #defines gui layout rectangle
             refX = 0
             refY = 0
         else:
-          
+            #calculate location of bottom left corner for new rectangke based on alignment
             if self.alignment.currentText() == 'Bottom':
                 refX = self.rectangles[-1].nodes[3].x #bottom right node provides reference
                 refY = self.rectangles[-1].nodes[3].y #bottom right node provides reference
@@ -205,11 +231,19 @@ class RectGenerator(QWidget): #defines gui layout rectangle
 
 
     def deleteRectEdge(self,rect,edge):
+        """
+        Deletes the specified edge from rect.
+        """
         rect.removeEdge(edge)
         self.edgeEditor.deleteEdge(self.edgeEditor.edges.index(edge)+1)
 
     def generateNodes(self):
-        #first lets shift all rectangles sp that all coordinates are positive
+        """
+        Main mesh generation algorithm. Splits the region enclosed by the boundary into equally sized rectangles.
+       Generates and organizes all nodes, elements and boundaries. Randomizes mesh if the Randomize Mesh checkbox is selected. 
+       Emits the meshCreated signal.
+        """
+        #first lets shift all rectangles up that all coordinates are positive
         minX = 0
         minY = 0
         for rect in self.rectangles:
@@ -230,7 +264,7 @@ class RectGenerator(QWidget): #defines gui layout rectangle
         mesh = Mesh.Mesh()
         for rect in self.rectangles:
             nodes =[]
-            #making nodes
+            #making nodes in evenly spaced grid
             nodex = np.arange(round(rect.nodes[2].x,8),round(rect.nodes[0].x+self.dx(),8),self.dx())
             nodey = np.arange(round(rect.nodes[2].y,8),round(rect.nodes[0].y+self.dy(),8),self.dy())
             for i in range(len(nodex)):
@@ -238,7 +272,7 @@ class RectGenerator(QWidget): #defines gui layout rectangle
                 for j in range(len(nodey)):
                     node = Mesh.Node(nodex[i],nodey[j])
 
-                    #if node is a corner copy the corner node
+                    #if node is a corner copy the corner node to avoid duplicates
                     for rnode in rect.nodes:
                         if node == rnode:
                             node = rnode
@@ -317,7 +351,8 @@ class RectGenerator(QWidget): #defines gui layout rectangle
                         if boundary.nodes[0] in elem.nodes:
                             if boundary.nodes[1] in elem.nodes:
                                 boundary.element = elem
-
+                 
+                        
                     mesh.addBoundary(boundary)
                     boundary.conditions['temperature'] = [[0,1,0],[0,1,0]]
                     boundary.conditions['concentration'] = [[0,1,0],[0,1,0]]
@@ -334,6 +369,9 @@ class RectGenerator(QWidget): #defines gui layout rectangle
         
         mesh.nx = nx
         mesh.ny = ny
+
+        #make elements more randomized, ie not perfect rectangles
+        #irregular quadrilaterals
         if self.randomMesh():
             for node in mesh.nodes:
                 node.nudge(self.dx(), self.dy())
