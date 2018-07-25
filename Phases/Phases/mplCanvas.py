@@ -74,6 +74,7 @@ class DynamicCanvas(MplCanvas):
         self.plotTypes.append(isothermalLines(self))
         self.plotTypes.append(fliqContour(self))
         self.plotTypes.append(pressureContour(self))
+        self.plotTypes.append(entropyContour(self))
         self.plotTypes.append(velVectors(self))
        
         self.plotTypes[-1].addContourPlots(self.plotTypes[1:-1])
@@ -412,8 +413,26 @@ class pressureContour(ContourPlot):
         
         divider=make_axes_locatable(self.canvas.axes)
         clbr = self.canvas.fig.colorbar(mappable=cont)
-        clbr.set_label(r'Pressure Reference') 
-        
+        clbr.set_label(r'Pressure Reference')
+
+
+class entropyContour(ContourPlot):
+
+    def __init__(self, canvas):
+        super().__init__(canvas, 'Entropy Contour')
+
+    def plotFunction(self, mesh, timeStep):
+        X, Y = mesh.getXY()
+        E = mesh.getEntropy(timeStep)
+
+
+        self.canvas.axes.set_title('Entropy Contours')
+        cont = self.canvas.axes.contourf(X, Y, E, cmap=self.getCM())
+
+        divider = make_axes_locatable(self.canvas.axes)
+        clbr = self.canvas.fig.colorbar(mappable=cont)
+        clbr.set_label(r'Entropy Reference')
+
 class velVectors(VectorField):
     
     def __init__(self,canvas):

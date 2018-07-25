@@ -458,6 +458,16 @@ class Mesh(object):
         for node in self.nodes:
             p[node.index-1] = node.pressure[timeStep-1]
         return self.split(p)
+
+    def getEntropy(self,timeStep):
+        """
+        Returns the entropy values of the mesh’s nodal points
+        at the given timeStep as a 2D numpy array.
+        """
+        e = np.zeros(len(self.nodes))
+        for node in self.nodes:
+            e[node.index-1] = node.entropy[timeStep-1]
+        return self.split(e)
         
     def split(self, data):
          """
@@ -492,10 +502,11 @@ class Mesh(object):
                 mu = self.params['vsc']*self.params['prl']
 
 
-                entropy = mu*np.divide((np.multiply(dudy,dudy)+np.multiply(dvdx,dvdx)) , np.multiply(T,T))
+                #entropy = mu*np.divide((np.multiply(dudy,dudy)+np.multiply(dvdx,dvdx)) , np.multiply(T,T))
                 #entropy2 = self.params['k']*np.divide( (np.multiply(dTdx,dTdx)+np.multiply(dTdy,dTdy)), np.multiply(T,T))
-                #entropy3 = mu*np.divide((np.multiply(dudy+dvdx,dudy+dvdx)+2*np.multiply(dvdy,dvdy) + 2*np.multiply(dudx,dudx)) , T)
+                entropy3 = mu*np.divide((np.multiply(dudy+dvdx,dudy+dvdx)+2*np.multiply(dvdy,dvdy) + 2*np.multiply(dudx,dudx)) , T)
                 #entropy = entropy2+entropy3
+                entropy = entropy3
 
                 for j in range(len(self.nodes)):
                   
