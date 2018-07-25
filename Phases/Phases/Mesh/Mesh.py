@@ -485,6 +485,12 @@ class Mesh(object):
         self.params[param] = toWhat
 
     def calcEntropy(self):
+        """
+         This method calculates the entropy at each node based on the output.
+         Uses numpy's gradient function to calculate partial derivatives.
+         This is only valid for regularly spaced nodes (rectangular grids)
+         Does not calculate accurate values for randomized meshes.
+        """
         if self.dx is not None and self.dy is not None:
            
             for i in range(1,int(self.params['tstp'])+1):
@@ -765,6 +771,9 @@ class Node(object):
         self.entropy = []
 
     def nudge(self, dx, dy):
+        """
+        Randomly changes x attribute by +/- dx/4 and y value by =/- dy/4
+        """
         if not self.isBoundary:
             self.x = self.x + random()*dx/2 - dx/4
             self.y = self.y + random()*dy/2 - dy/4
