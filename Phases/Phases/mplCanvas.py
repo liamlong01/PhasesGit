@@ -31,6 +31,7 @@ class MplCanvas(FigureCanvas):
         # We want the axes cleared every time plot() is called
         # This line appears to not work in newest matplotlib versions
         # Commented, hopefully will not cause issues
+
         #self.axes.hold(False)
 
         self.compute_initial_figure()
@@ -118,8 +119,10 @@ class PlotType(object):
     def __init__(self, canvas):
         self.label = None
         self.canvas = canvas
+
     def plotFunction(self,*args,**kwargs):
-        pass
+        style.use(self.bgSelect.currentText())
+
     def settings(self):
         """
         This method returns a QWidget that can allow user inputs that control the formatting of the graph.
@@ -128,7 +131,21 @@ class PlotType(object):
         Other places in the application are responsible for calling this method and formatting the widget
         in the application window.
         """
-        return QtWidgets.QWidget()
+
+        widget = QtWidgets.QGroupBox('Generic Plot Settings')
+        layout = QtWidgets.QFormLayout()
+        self.bgSelect = QtWidgets.QComboBox()
+
+        self.bgSelect.addItems(style.available)
+        layout.addRow('Set Background Color :', self.bgSelect)
+        self.bgSelect.setCurrentText('Grey')
+
+        widget.setLayout(layout)
+
+        return widget
+
+
+
     
     
 """
@@ -157,8 +174,12 @@ class ColorMapPlot(PlotType):
         self.cm = 'Jet'
         
     def settings(self):
-        widget = QtWidgets.QGroupBox('ColorMap Plot Settings')
-        layout = QtWidgets.QFormLayout()
+
+
+        widget = super().settings()
+        widget.setTitle('ColorMap Plot Settings')
+
+        layout = widget.layout()
         
         self.cmSelect = QtWidgets.QComboBox()
      
@@ -168,8 +189,7 @@ class ColorMapPlot(PlotType):
         
         self.reverse = QtWidgets.QCheckBox()
         layout.addRow('Reverse Colormap :',self.reverse)
-        
-        widget.setLayout(layout)
+
         return widget
         
     def getCM(self):
@@ -177,6 +197,9 @@ class ColorMapPlot(PlotType):
             return self.colormaps[self.cmSelect.currentText()] 
         else:
            return self.reverseColormaps[self.cmSelect.currentText()]
+
+    def plotFunction(self, *args, **kwargs):
+        super().plotFunction()
     
  
 class ContourPlot(ColorMapPlot):
@@ -224,6 +247,9 @@ class ContourPlot(ColorMapPlot):
 
     def setNumContours(self, toWhat):
         self.numContours = toWhat
+
+    def plotFunction(self, *args, **kwargs):
+        super().plotFunction()
         
     
 class VectorField(ColorMapPlot):
@@ -305,6 +331,9 @@ class VectorField(ColorMapPlot):
          if key  != 'No Contour':
              contour = self.contours[key]
              contour.plotFunction(mesh,timeStep)
+
+    def plotFunction(self, *args, **kwargs):
+        super().plotFunction()
             
         
     
@@ -315,6 +344,7 @@ class tempContour(ContourPlot):
         self.units = {'Kelvin' : (self.kelvin,'K'), 'Celsius': (self.celsius,'C'), 'Fahrenheit': (self.fahrenheit,'F')}
         
     def plotFunction(self, mesh,timeStep):
+        super().plotFunction()
         X,Y = mesh.getXY()
         T = mesh.getTemperature(timeStep)
         unitConverter,unit = self.getUnits()
@@ -364,6 +394,7 @@ class isothermalLines(tempContour):
   
         
     def plotFunction(self, mesh,timeStep):
+        super().plotFunction()
         X,Y = mesh.getXY()
         T = mesh.getTemperature(timeStep)
         unitConverter,unit = self.getUnits()
@@ -384,6 +415,7 @@ class fliqContour(ContourPlot):
         
         
     def plotFunction(self, mesh,timeStep):
+        super().plotFunction()
         X,Y = mesh.getXY()
         FLIQ = mesh.getFLIQ(timeStep)
         V = [i*(mesh.fliqRange[1]-mesh.fliqRange[0])/self.numContours + mesh.fliqRange[0]
@@ -405,6 +437,7 @@ class pressureContour(ContourPlot):
   
         
     def plotFunction(self, mesh,timeStep):
+        super().plotFunction()
         X,Y = mesh.getXY()
         P = mesh.getPressure(timeStep)
         V = [i*(mesh.pressureRange[1]-mesh.pressureRange[0])/self.numContours + mesh.pressureRange[0]
@@ -424,6 +457,7 @@ class entropyContour(ContourPlot):
         super().__init__(canvas, 'Entropy Contour')
 
     def plotFunction(self, mesh, timeStep):
+        super().plotFunction()
         X, Y = mesh.getXY()
         E = mesh.getEntropy(timeStep)
 
@@ -441,6 +475,7 @@ class velVectors(VectorField):
         super().__init__(canvas, 'Velocity Vector Field')
         
     def plotFunction(self, mesh,timeStep):
+        super().plotFunction()
         self.plotContour(mesh,timeStep)
         
         X,Y = mesh.getXY()
