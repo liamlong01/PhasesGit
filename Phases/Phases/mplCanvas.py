@@ -18,7 +18,7 @@ from PyQt5 import QtWidgets, QtCore
 #import graphs
 
 
-style.use('ggplot')
+style.use('seaborn-bright')
 
 class MplCanvas(FigureCanvas):
     """Ultimately, this is a QWidget (as well as a FigureCanvasAgg, etc.)."""
@@ -105,6 +105,9 @@ class DynamicCanvas(MplCanvas):
             fig.tight_layout()
         except:
             pass
+
+    def saveimage(self,toWhat):
+        self.fig.savefig(toWhat)
 
         
 class PlotType(object):

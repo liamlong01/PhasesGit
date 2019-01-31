@@ -261,6 +261,7 @@ class ApplicationWindow(QtWidgets.QMainWindow):
         # setting up the plot controls
         self.plotcontrols = PlotController(self, self.mainPlot)
         self.plotcontrols.plotSettingsUpdated.connect(self.updatePlot) # allows the graph to be updated when settings are changed
+        self.plotcontrols.saveSvgSignal.connect(self.savePlot)  # allows the graph to be updated when settings are changed
         
         
         # This adds the plotcontrol widgets to a dock window as a container
@@ -344,6 +345,11 @@ class ApplicationWindow(QtWidgets.QMainWindow):
     """
         if self.mesh is not None:
             self.mainPlot.update_figure(plotType, timeStep, self.mesh, doNodes)
+
+    def savePlot(self, toWhat = 'TestImage.svg'):
+        self.mainPlot.saveimage(toWhat)
+
+
 
     def dockControls(self):
         """A method for docking the plotcontrols to the left side of the window.

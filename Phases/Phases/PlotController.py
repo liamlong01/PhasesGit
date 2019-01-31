@@ -32,6 +32,7 @@ class PlotController(QtWidgets.QWidget):
     """
     
     plotSettingsUpdated = QtCore.pyqtSignal(PlotType, int, bool)
+    saveSvgSignal = QtCore.pyqtSignal()
 
     def __init__(self, parent, graphWidget):
         """
@@ -73,6 +74,10 @@ class PlotController(QtWidgets.QWidget):
         apply = QtWidgets.QPushButton('Apply', parent = self)
         apply.clicked.connect(self.update_controls)
         grid.addWidget(apply,7,1)
+
+        saveSVG= QtWidgets.QPushButton('Save SVG', parent=self)
+        saveSVG.clicked.connect(self.save_svg)
+        grid.addWidget(saveSVG, 8, 1)
        
 
         label = QtWidgets.QLabel('Animation Interval (ms):', self)
@@ -90,7 +95,7 @@ class PlotController(QtWidgets.QWidget):
         
         grid.addWidget(self.graph.plotTypes[0].settings(),5,0,2,2)
 
-        grid.setRowStretch(8,1) 
+        grid.setRowStretch(9,1)
        
         self.setLayout(grid)
         
@@ -181,5 +186,9 @@ class PlotController(QtWidgets.QWidget):
         self.timer.stop()
         self.isAnimated.setCheckState(0)
         self.updateGraph()
+
+
+    def save_svg(self):
+        self.saveSvgSignal.emit()
          
 
