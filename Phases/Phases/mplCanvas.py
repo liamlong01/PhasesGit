@@ -29,7 +29,9 @@ class MplCanvas(FigureCanvas):
         
         self.axes = self.fig.add_subplot(111)
         # We want the axes cleared every time plot() is called
-        self.axes.hold(False)
+        # This line appears to not work in newest matplotlib versions
+        # Commented, hopefully will not cause issues
+        #self.axes.hold(False)
 
         self.compute_initial_figure()
 
