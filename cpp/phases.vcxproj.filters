@@ -99,6 +99,9 @@
     <ClCompile Include="uvcor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PythonSetup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constInit.h">
@@ -111,6 +114,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="variaInit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PythonSetup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

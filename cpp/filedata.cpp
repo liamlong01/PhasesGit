@@ -18,7 +18,7 @@ using namespace std;
 
 ///////////////////////////////////////////////////////////////////////////////
 //-- EXE Input / output for C++ executable program --//
-void filedata(int fn)
+void filedata(int fn, char* meshDir, char* bcDir, char* icDir, char* outputDir, char* prjDir)
 {
   char c1, c2, c3, c4, c5, c6, c7, c8;
   int i, j, k, n, nnp, nel, nx, ny, n1, n2;
@@ -35,47 +35,38 @@ void filedata(int fn)
   ifstream file8;
   ifstream file9;
  
-  /*
-  file3.open("C:\\Users\\Peter\\Desktop\\Resource\\mesh2.dat"); // added our own computer's directory
-  file4.open("C:\\Users\\Peter\\Desktop\\Resource\\sample2.prj");
-  file5.open("C:\\Users\\Peter\\Desktop\\Resource\\mesh2.dat");
-  file6.open("C:\\Users\\Peter\\Desktop\\Resource\\bc2.dat");
-  file7.open("C:\\Users\\Peter\\Desktop\\Resource\\ic2.dat");
-  file8.open("C:\\Users\\Peter\\Desktop\\Resource\\output2.dat");
-  file9.open("C:\\Users\\Peter\\Desktop\\Resource\\custom2.dat");
- */
   
-  file3.open("C:\\Users\\Peter\\Desktop\\CFD\\Spring 2016\\Resources\\prj2\\mesh2.dat"); // added our own computer's directory
-  file4.open("C:\\Users\\Peter\\Desktop\\CFD\\Spring 2016\\Resources\\prj2\\sample2.prj");
-  file5.open("C:\\Users\\Peter\\Desktop\\CFD\\Spring 2016\\Resources\\prj2\\mesh2.dat");
-  file6.open("C:\\Users\\Peter\\Desktop\\CFD\\Spring 2016\\Resources\\prj2\\bc2.dat");
-  file7.open("C:\\Users\\Peter\\Desktop\\CFD\\Spring 2016\\Resources\\prj2\\ic2.dat");
-  file8.open("C:\\Users\\Peter\\Desktop\\CFD\\Spring 2016\\Resources\\prj2\\output2.dat");
-  file9.open("C:\\Users\\Peter\\Desktop\\CFD\\Spring 2016\\Resources\\prj2\\custom2.dat");
+ 
+  file4.open(prjDir);
+  file5.open(meshDir);
+  file6.open(bcDir);
+  file7.open(icDir);
+  file8.open(outputDir);
+
+  //file9.open("C:/Users/ljl432/Documents/Previous software/Nicole/Data/custom2.dat"); //????
+ 
+
+
+  //file3.open("C:/Users/nw8474/Desktop/phases/dat/mesh3.dat"); // added our own computer's directory
+  //file4.open("C:/Users/nw8474/Desktop/phases/dat/sample3.prj");
+  //file5.open("C:/Users/nw8474/Desktop/phases/dat/mesh3.dat");
+  //file6.open("C:/Users/nw8474/Desktop/phases/dat/bc3.dat");
+  //file7.open("C:/Users/nw8474/Desktop/phases/dat/ic3.dat");
+  //file8.open("C:/Users/nw8474/Desktop/phases/dat/output31.dat");
+  //file9.open("C:/Users/nw8474/Desktop/phases/dat/custom3.dat");
   
-
-  /*
-	file3.open("C:/Users/nw8474/Desktop/phases/dat/mesh3.dat"); // added our own computer's directory
-  file4.open("C:/Users/nw8474/Desktop/phases/dat/sample3.prj");
-  file5.open("C:/Users/nw8474/Desktop/phases/dat/mesh3.dat");
-  file6.open("C:/Users/nw8474/Desktop/phases/dat/bc3.dat");
-  file7.open("C:/Users/nw8474/Desktop/phases/dat/ic3.dat");
-  file8.open("C:/Users/nw8474/Desktop/phases/dat/output31.dat");
-  file9.open("C:/Users/nw8474/Desktop/phases/dat/custom3.dat");
-  */
-
   
 
 	// Output files
 	ofstream file10;
 	//file10.open("c:/phases/output1.dat");
-       file10.open("C:\\Users\\Peter\\Desktop\\Resource\\output2.dat");
+       file10.open(outputDir);
 	   ofstream file11;
-	   file11.open("C:\\Users\\Peter\\Desktop\\Resource\\vps2.dat");
+	   file11.open("C:/Users/nw8474/Desktop/phases/dat/vps2.dat");
 
-  file3 >> nnp >> c1 >> nel >> c2 >> n1 >> c3 >> n2 >> c4 >>
-   nx >> c5 >> ny >> c6 >> nsrf;
-  file3.close();
+  file5 >> nnp >> c1 >> nel >> c2 >> n1 >> c3 >> n2 >> c4 >> nx
+        >> c5 >> ny >> c6 >> nsrf;
+
   for (i = 1; i <= 30; ++i) {
     file4 >> val;
 	//cout << val << endl; 
@@ -106,8 +97,7 @@ void filedata(int fn)
   }
 
   // Read mesh file (element-node array and x,y node positions)
-  file5 >> nnp >> c1 >> nel >> c2 >> n1 >> c3 >> n2 >> c4 >> nx
-   >> c5 >> ny >> c6 >> nsrf;
+
   /*cout << nnp << " " << c1 << " " << nel << " " << c2 
 	   << n1 << " " << c3 << " " << n2 << " " << c4 << " " << nx
 	   << c5 << " " << ny << " " << c6 << " " << nsrf;*/
@@ -187,7 +177,7 @@ void filedata(int fn)
 	  worked = Adda(43, i, 3, k, dval3, nnp, nel, nx, ny, nsrf);											// calls Adda
     }
   }
-
+  
   // Read initial condition file
   for (n = 1; n <= 4; ++n) {
     if (n == 1) {
@@ -220,21 +210,23 @@ void filedata(int fn)
     worked = Adda(0, n, 1, 1, 1, nnp, nel, nx, ny, nsrf);														// calls Adda
     cout << "step complete: " << n << endl;
     for (i = 1; i <= nnp; ++i) {
-		worked = Adda(200, i, 1, 1, 1, nnp, nel, nx, ny, nsrf);													// calls Adda
-		double temperature; 
-		temperature = worked*(tmax - tmin) + tmin;					// worked = (temperature-tmin)/(tmax-tmin) to give dimensional temperatures 
-		double uvelocity;
-		uvelocity = vps[i][1] * ur;
-		double vvelocity;
-		vvelocity = vps[i][2] * ur; 
-		double wvelocity;
-		wvelocity = vps[i][3] * ur;
+      worked = Adda(200, i, 1, 1, 1, nnp, nel, nx, ny, nsrf);													// calls Adda
+	  double temperature; 
+	  temperature = worked*(tmax - tmin) + tmin;					// worked = (temperature-tmin)/(tmax-tmin) to give dimensional temperatures 
+	 double uvelocity;
+	  uvelocity = vps[i][1] * ur;
+	  double vvelocity;
+	  vvelocity = vps[i][2] * ur; 
+	  double wvelocity;
+	  wvelocity = vps[i][3] * ur;
 	  
 	  /* for (int i = 1; i <= nel; i++) {
 		  for (int j = 1; j <= 4; j++) {
 		  
 			  cout << i << "," << j << "," << tn[i][j]<< "," << temperature << endl;
 		  }
+
+
 	  }*/
 
 	  /*
@@ -250,9 +242,11 @@ void filedata(int fn)
 		if (i == 10) {cout << " T = " << temperature << endl;}
 			// Optional print to ouput file 
 		file10 << i << "," << temperature << "," << cn[i][6] << "," << rho << "," << uvelocity << "," << vvelocity << "," << wvelocity << "," << '0' << "," << fl[i][1] << "," << ph[i][3] << endl;
-	 }
-
-    worked = Adda(100, 10, 1, 1, 1, nnp, nel, nx, ny, nsrf);													// calls Adda
+		
+	}
+	
+    worked = Adda(100, 10, 1, 1, 1, nnp, nel, nx, ny, nsrf);	// calls Adda			
+	
 }
 
   // Display output (samp13d.prj (1-D icing problem))
@@ -301,4 +295,5 @@ void filedata(int fn)
   file7.close();
   file8.close();
   file9.close();
+  
 }

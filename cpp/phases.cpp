@@ -36,7 +36,7 @@ using namespace std;
 int main()
 {
   
-	filedata(fn);
+//	filedata(fn);
 	getchar();
 
 	

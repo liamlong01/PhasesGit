@@ -31,7 +31,7 @@ void custom(int n, int m, double &tm, double &ci, double &ti,
 void dsmooth(int nel, int nnp, double vps[nnpm][14]);
 void entropy(double df, int nel, int nnp, int nsrf,
  double vps[nnpm][14]);
-void filedata(int fn);
+void filedata(int fn, char* meshDir, char* bcDir, char* icDir, char* outputDir, char* prjDir);
 void forbak(int m, double c[3*nnpm][6*nym+11], double z[3*nnpm],
  double r[3*nnpm], int nym, int &neq, int nnpm, int band3);
 void genul(int m, double c[3*nnpm][6*nym+11], int nym,

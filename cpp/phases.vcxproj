@@ -73,7 +73,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <OmitFramePointers>true</OmitFramePointers>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PHASES_EXPORTS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -109,6 +109,7 @@
     <ClCompile Include="phase.cpp" />
     <ClCompile Include="phase3.cpp" />
     <ClCompile Include="phases.cpp" />
+    <ClCompile Include="PythonSetup.cpp" />
     <ClCompile Include="shape.cpp" />
     <ClCompile Include="stiffc.cpp" />
     <ClCompile Include="stiffdc.cpp" />
@@ -123,6 +124,7 @@
   <ItemGroup>
     <ClInclude Include="constInit.h" />
     <ClInclude Include="functInit.h" />
+    <ClInclude Include="PythonSetup.h" />
     <ClInclude Include="variaExtern.h" />
     <ClInclude Include="variaInit.h" />
   </ItemGroup>
