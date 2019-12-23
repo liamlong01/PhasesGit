@@ -25,6 +25,7 @@ void stiffu(int e, double df, double xip[npe1][3],
   int i, j, n, m;
   double mflow, dfs, advu, advv, advp, dx, dy, jac;
   double dqdx, dqdy, flip, dfsu, dfsv, pp, ppr, rr;
+  
 
   // Integration point influence coefficients
   dfs = 0.25*(pr[e][1] +pr[e][2] +pr[e][3] +pr[e][4]);
@@ -44,8 +45,13 @@ void stiffu(int e, double df, double xip[npe1][3],
 
     // Prandtl number: molecular, turbulent + two-phase parts
     pp = k0*(1.0 -flip)*(1.0 -flip)/(flip*flip*flip +1.0E-16);
-    //ppr = pr[e][i] +pp;
-	ppr = mu_e;
+	if (calcppr) {
+		ppr = pr[e][i] + pp;
+
+	}
+	else {
+		ppr = mu_e;
+	}
     for (j = 1; j <= nnpe; ++j) {
 
       // Diffusion, advection flux

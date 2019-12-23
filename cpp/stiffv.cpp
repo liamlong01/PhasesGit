@@ -25,6 +25,7 @@ void stiffv(int e, double df, double flux[4][npe1][npe1],
   double rr, tbar, cbar, pm, flip, dqdx, dqdy, dx, dy, pp;
   double jac, scf, advu, advv, advp, dfsu, dfsv, ppr, mflow;
 
+
   pm = (vsc*prl*phl)/(pkl +1.0E-16);
   cbar = 0.5*(pcs+ pcl);
   tbar = 0.5;
@@ -43,8 +44,13 @@ void stiffv(int e, double df, double flux[4][npe1][npe1],
 
     // Prandtl number: molecular, turbulent + two-phase parts
     pp = k0*(1.0 -flip)*(1.0 -flip)/(flip*flip*flip+1.0E-16);
-    //ppr = pr[e][i] +pp;
-	ppr = mu_e;
+	if (calcppr) {
+		ppr = pr[e][i] + pp;
+		
+	}
+	else {
+		ppr = mu_e;
+	}
     for (j = 1; j <= nnpe; ++j) {
 
       // Diffusion, advection flows
