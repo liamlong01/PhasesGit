@@ -134,6 +134,7 @@ double Adda(int w1, int w2, int w3, int w4, double w5, int nnp,
 
   // Loop over time                                                                                                 //calling cntrl
   if (w1 == 0) {
+	  mu_e = w5;
 	  fo = w1*df; //cout << fo << endl;
 	cntrl(se, nnp, nel, nsrf, band3, df, fo, ph, ec, fl, cn, tn, z, vps);
   }

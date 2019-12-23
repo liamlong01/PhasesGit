@@ -1,21 +1,36 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "phases", "phases.vcxproj", "{D193338D-F5B7-45B9-837A-855D6928A067}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|ARM64 = Debug|ARM64
+		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|ARM64 = Release|ARM64
+		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D193338D-F5B7-45B9-837A-855D6928A067}.Debug|ARM.ActiveCfg = Debug|Win32
+		{D193338D-F5B7-45B9-837A-855D6928A067}.Debug|ARM64.ActiveCfg = Debug|Win32
+		{D193338D-F5B7-45B9-837A-855D6928A067}.Debug|x64.ActiveCfg = Debug|Win32
 		{D193338D-F5B7-45B9-837A-855D6928A067}.Debug|x86.ActiveCfg = Debug|Win32
 		{D193338D-F5B7-45B9-837A-855D6928A067}.Debug|x86.Build.0 = Debug|Win32
+		{D193338D-F5B7-45B9-837A-855D6928A067}.Release|ARM.ActiveCfg = Release|Win32
+		{D193338D-F5B7-45B9-837A-855D6928A067}.Release|ARM64.ActiveCfg = Release|Win32
+		{D193338D-F5B7-45B9-837A-855D6928A067}.Release|x64.ActiveCfg = Release|Win32
 		{D193338D-F5B7-45B9-837A-855D6928A067}.Release|x86.ActiveCfg = Release|Win32
 		{D193338D-F5B7-45B9-837A-855D6928A067}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {543C727B-4795-4E1A-9FEE-F0E8D002C92E}
 	EndGlobalSection
 EndGlobal

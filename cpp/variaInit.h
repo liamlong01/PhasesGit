@@ -47,6 +47,7 @@ double dtr; // reference temperature, difference between max and min temperature
 double bt; // thermal expansion coefficent 
 double bs; // solutal expansion coefficient 
 double fo;// Fourier number, timestep the number of total steps 
+double mu_e;
 int ie[nelm][npe1]; // local to global node mapping
 int bgn[nsrfm][3]; // boundary global node numbers
 int bel[nsrfm]; // boundary element numbers

@@ -53,7 +53,9 @@ void shape(int e, int nnpm, double &dx, double &dy,
  double s[4][3], double dn[npe1][5], double ivo[npe1],
  double &jac, double &dqdx, double &dqdy);
 void stiffc(int e, double df, double fo, double xip[npe1][3],
- double flux[4][npe1][npe1], double sc[npe1],
+ double flux[4][npe1][npe1], double 
+	
+	[npe1],
  double aq[4][npe1][npe1], double rq[npe1]);
 void stiffdc(int e, double df, double xip[npe1][3],
  double flux[4][npe1][npe1], double aq[4][npe1][npe1],

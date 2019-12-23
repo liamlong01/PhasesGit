@@ -38,12 +38,14 @@ extern double wr;
 extern double vsc;
 extern double tsol;
 extern double tmlt;
+extern double mu_e;
 extern double tmin;
 extern double tmax;
 extern double dtr;
 extern double bt;
 extern double bs;
 extern double fo;
+
 extern int ie[nelm][npe1]; // local to global node mapping
 extern int bgn[nsrfm][3]; // boundary global node numbers
 extern int bel[nsrfm]; // boundary element numbers
