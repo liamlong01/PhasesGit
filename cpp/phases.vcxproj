@@ -105,12 +105,15 @@
     <ClCompile Include="genul.cpp" />
     <ClCompile Include="initdt.cpp" />
     <ClCompile Include="ipoint.cpp" />
+    <ClCompile Include="iterC.cpp" />
+    <ClCompile Include="iterT.cpp" />
     <ClCompile Include="nullmx.cpp" />
     <ClCompile Include="phase.cpp" />
     <ClCompile Include="phase3.cpp" />
     <ClCompile Include="phases.cpp" />
     <ClCompile Include="PythonSetup.cpp" />
     <ClCompile Include="shape.cpp" />
+    <ClCompile Include="iterUVP.cpp" />
     <ClCompile Include="stiffc.cpp" />
     <ClCompile Include="stiffdc.cpp" />
     <ClCompile Include="stiffdv.cpp" />

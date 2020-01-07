@@ -132,9 +132,20 @@ double Adda(int w1, int w2, int w3, int w4, double w5, int nnp,
     csb[w2+1][w3] = w5;
   }
 
+  if (w1 = 80) {
+  
+  
+  }
+
   // Loop over time                                                                                                 //calling cntrl
   if (w1 == 0) {
-	  mu_e = w5;
+	  if (w4 == 1) {
+		  calcppr = 0;
+		  mu_e = w5;
+	  }
+	  else {
+		  calcppr = 1;
+	  }
 	  fo = w1*df; //cout << fo << endl;
 	cntrl(se, nnp, nel, nsrf, band3, df, fo, ph, ec, fl, cn, tn, z, vps);
   }
