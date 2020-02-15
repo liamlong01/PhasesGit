@@ -51,7 +51,7 @@ double PyCtrl(int nnp, int nel, int nsrf) {
 
 			for (cmf = 1; cmf <= tk; ++cmf) {
 				
-				cdif = PyCtrlC(nel,nsrf,nnp,cmf,aq,rq);
+				cdif = PyCtrlC(nel,nsrf,nnp,cmf);
 				// Quit early for small residual
 				if ((cr == 0) && (cdif < tol)) { break; }
 			}
@@ -61,7 +61,7 @@ double PyCtrl(int nnp, int nel, int nsrf) {
 		if ((se == 2) || (se == 12) || (se == 23) || (se == 4)) {
 			for (tph = 1; tph <= tk; ++tph) {
 																	// calls phase
-				tdif = PyCtrlT(nel, nsrf, nnp, aq, rq);
+				tdif = PyCtrlT(nel, nsrf, nnp);
 
 
 				// Quit early if tentative phase matches new phase
@@ -98,7 +98,9 @@ double PyCtrl(int nnp, int nel, int nsrf) {
 }
 
 void PyPhaseTempCheck(int nnp) {
-	double tphs, tphl, cphs, cprl, cphl, hbar;
+	double tphs, tphl, cphs, cprl, cphl, hbar, ste;
+
+	ste = phl * dtr / (pl + 1.0E-32);
 	if (ao != 2) {
 		for (int i = 1; i <= nnp; ++i) {
 			tphs = tmlt - eps - cn[i][1] * (tmlt - eps - tsol)
@@ -217,7 +219,7 @@ double PyCtrlC(int nel, int nsrf, int nnp, int cmf) {
 		bndry(1, 1, 1, nsrf, fo, bc, c, r);												// calls bndry
 		genul(1, c, nym, nnp, nnpm, band3);												// calls genul
 		forbak(1, c, z, r, nym, nnp, nnpm, band3);										// calls forbak
-		for (j = 1; j <= nnp; ++j) {
+		for (int j = 1; j <= nnp; ++j) {
 			cn[j][1] = z[j];
 		}
 
@@ -275,7 +277,7 @@ double PyCtrlT(int nel, int nsrf, int nnp) {
 //TODO how to intialize PYCtrlUVP with array arguments
 // aq must persist across the three ctrl loops!!!
 // easy (currently used for other vars) solution -> put in variaInit.h
-double PyCtrlUVP(int nel, int nsrf, int nnp, double aq[4][npe1][npe1], double  rq[npe1]) {
+double PyCtrlUVP(int nel, int nsrf, int nnp) {
 
 	//vdif rlx are origninally  defined in ctrl.cpp but only used in UVP solver
 	double vdif, rlx;

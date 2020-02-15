@@ -50,7 +50,7 @@ void stiffu(int e, double df, double xip[npe1][3],
 
 	}
 	else {
-		ppr = mu_e;
+		ppr = mu_e[e][i];
 	}
     for (j = 1; j <= nnpe; ++j) {
 

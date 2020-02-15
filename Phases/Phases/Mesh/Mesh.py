@@ -519,9 +519,35 @@ class Mesh(object):
                     print(entropy[j%self.ny,floor(j/self.ny)])
                     self.nodes[j].entropy.append(entropy[j%self.ny,floor(j/self.ny)])
             
+			
+	def sendToAdda(self):
+		caller = PhasesCaller.PhasesCaller()
+		
+		
+		self.initAdda(caller)
+		self.runAdda(caller)
+		del caller
+		
+	def runCtrl(self):
+		caller = PhasesCaller.PhasesCaller()
+		
+		self.initAdda(caller)
+		
+		for i in range(int(self.params['tstp'])):
+			self.Phases_Ctrl(caller)
+			
+			
+			calcppr = 1;
+			
+		self.getAddaOutput(caller)
+			
+		del caller
             
-    def sendToAdda(self):
-    
+    def initAdda(self, caller):
+		 #TODO: testAdda is currenetly being used for testing and should be changed to just Adda in the final implementation
+        tempAdda = caller.testAdda  # Adda will be called frequently so this makes a good shorthand
+        
+        Adda = lambda a,b,c,d,e: tempAdda(a,b,c,d,e,len(self.nodes),len(self.elements),self.nx,self.ny,len(self.boundaries))
         
         X, Y = self.getXY()
 
@@ -533,12 +559,9 @@ class Mesh(object):
         self.ny, self.nx = X.shape #shape returns the number of rows and the number of columns in the X array
             
         
-        caller = PhasesCaller.PhasesCaller()
         
-        #TODO: testAdda is currenetly being used for testing and should be changed to just Adda in the final implementation
-        tempAdda = caller.testAdda  # Adda will be called frequently so this makes a good shorthand
         
-        Adda = lambda a,b,c,d,e: tempAdda(a,b,c,d,e,len(self.nodes),len(self.elements),self.nx,self.ny,len(self.boundaries))
+       
         
         #Adda = lambda a,b,c,d,e: tempAdda(a,b,c,d,e,len(self.nodes),len(self.elements))
         #export params
@@ -659,11 +682,48 @@ class Mesh(object):
             Adda(54,elem.index,1,1,elem.initialConditions['v-velocity']/self.params['ur'])
             
         
+		
+		Adda(81, 1,1,1,1)
+		
         #execute   
         Adda(60, 1, 1, 1, 1);
-
+	
     
-        self.tempRange = []
+    
+	
+	def runAdda(self, caller):
+		 #TODO: testAdda is currenetly being used for testing and should be changed to just Adda in the final implementation
+        tempAdda = caller.testAdda  # Adda will be called frequently so this makes a good shorthand
+        
+        Adda = lambda a,b,c,d,e: tempAdda(a,b,c,d,e,len(self.nodes),len(self.elements),self.nx,self.ny,len(self.boundaries))
+	
+					
+		 #TODO: testAdda is currenetly being used for testing and should be changed to just Adda in the final implementation
+        tempAdda = caller.testAdda  # Adda will be called frequently so this makes a good shorthand
+        
+        Adda = lambda a,b,c,d,e: tempAdda(a,b,c,d,e,len(self.nodes),len(self.elements),self.nx,self.ny,len(self.boundaries))
+		
+		
+    
+        for i in range(int(self.params['tstp'])):
+            Adda(0, i+1, 1, 1, 1)
+            
+        #######get output
+        self.getAddaOutput()
+      
+            
+            
+               
+        del caller 
+        self.calcEntropy()
+		
+	def getAddaOutput(self):
+		 #TODO: testAdda is currenetly being used for testing and should be changed to just Adda in the final implementation
+        tempAdda = caller.testAdda  # Adda will be called frequently so this makes a good shorthand
+        
+        Adda = lambda a,b,c,d,e: tempAdda(a,b,c,d,e,len(self.nodes),len(self.elements),self.nx,self.ny,len(self.boundaries))
+	
+		self.tempRange = []
         self.concentrationRange = []
         self.fliqRange = []
         self.uVelRange = []
@@ -671,14 +731,8 @@ class Mesh(object):
         self.velMagRange = []
         self.pressureRange = []
     
-    
-        for i in range(int(self.params['tstp'])):
-            Adda(0, i+1, 1, 1, 1)
-            
-        #######get output
-        
-      
-            for node in self.nodes:
+	
+		for node in self.nodes:
                 dimTemp = Adda(100, 1, node.index, 1, 1)    
                 temp = dimTemp*(self.params['tmax']-self.params['tmin']) + self.params['tmin']   
                 
@@ -712,10 +766,83 @@ class Mesh(object):
                 node.liquidFrac.append(fliq )
                 self.setRange(self.fliqRange, fliq)
             
-            
-               
-        del caller 
-        self.calcEntropy()
+	
+		
+		
+	def Phases_Ctrl(self, caller):
+		 #TODO: testAdda is currenetly being used for testing and should be changed to just Adda in the final implementation
+        tempAdda = caller.testAdda  # Adda will be called frequently so this makes a good shorthand
+        
+        Adda = lambda a,b,c,d,e: tempAdda(a,b,c,d,e,len(self.nodes),len(self.elements),self.nx,self.ny,len(self.boundaries))
+		#TODO declare this caller in external function to speed up
+		caller = PhasesCaller.PhasesCaller()
+	
+		ste = self.params['phl']*self.params['dtr']/self.params['pl']
+		np3 = len(self.nodes)*3
+		tdif = 0.0
+		
+		caller.CtrlInit(len(self.nodes))
+		
+		for vk in range(1,self.params['tvk']+1):
+			if self.params['se'] == 1 or self.params['se'] == 12 or self.params['se'] ==  13 or self.params['se'] == 4 :
+				caller.PyCtrlC_init(leng(self.nodes))
+				cmx=2
+				cr=0
+				for cmf in range(1, self.params['tk']+1):
+					cdif = caller.CtrlC(len(self.elements), len(self.boundaries), length(self.nodes))
+					
+					if (cr==0) and cdif < self.params['tol'] :
+						break
+						
+			if self.params['se'] == 2 or self.params['se'] == 12 or self.params['se'] ==  23 or self.params['se'] == 4 :
+				for tph in range(1,self.params['tk']+1):
+					tdif = caller.CtrlT(len(self.elements), len(self.boundaries), length(self.nodes))
+					if (cr==0) and tdif < self.params['tol'] :
+						break
+						
+			caller.PhaseTempCheck(length(self.nodes))
+			
+			if self.params['se'] == 3 or self.params['se'] == 13 or self.params['se'] ==  23 or self.params['se'] == 4 :
+				for tph in range(1,self.params['tk']+1):
+					vdif = caller.CtrlUVP(len(self.elements), len(self.boundaries), length(self.nodes))
+					if vdif < self.params['tol'] :
+						break
+			
+		
+			self.tempRange = []
+			self.concentrationRange = []
+			self.fliqRange = []
+			self.uVelRange = []
+			self.vVelRange = []
+			self.velMagRange = []
+			self.pressureRange = []
+
+			
+			
+			
+			self.updateMu_e(caller)
+			
+		
+
+
+	def updateMu_e(self, caller):
+	
+		#TODO extract needed information for calculating viscosity, see AddaOutput function
+		#TODO calculate the mu_e for each node
+		for node in self.nodes:
+			# TODO extract needed in for, see getAddaOutput(), e.g. for temperature:
+				#dimTemp = caller.Adda(100, 1, node.index, 1, 1)
+				# temp = dimTemp*(self.params['tmax']-self.params['tmin']) + self.params['tmin']  
+				
+			# use to calculate values
+			pass
+		
+		 for elem in self.elements:
+            for node in elem.nodes:
+                caller.Adda(80, elem.index, node.index, node.mu_e, 1) #passes the index of each node to PHASES one at a time in the format of a 2d array
+	
+	
+   
    
     def setRange(self, rangeToSet, val):
         if rangeToSet:
@@ -756,6 +883,7 @@ class Node(object):
         self.pressure = []
         self.liquidFrac = []
         self.entropy = []
+		self.mu_e = []
 
     def clearData(self):
         """

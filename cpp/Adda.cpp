@@ -90,6 +90,8 @@ double Adda(int w1, int w2, int w3, int w4, double w5, int nnp,
   if (w1 == 33) {x[w2][2] = w5/lr;}
   if (w1 == 34) {dbc[w2][w3] = w4;}
 
+
+
   // Import boundary conditions
   if (w1 == 41) {bgn[w2][w3] = w4;}
   if (w1 == 42) {bel[w2] = w3;}
@@ -107,6 +109,7 @@ double Adda(int w1, int w2, int w3, int w4, double w5, int nnp,
         vps[n][2] = w5;
         vps[n][3] = 0.0;
       }
+	   
     }
   }
 																											    	//calling initdt
@@ -117,6 +120,9 @@ double Adda(int w1, int w2, int w3, int w4, double w5, int nnp,
 	//cout << initdt << endl;
 
   }
+
+
+
 
   // Variable property data
   if (w1 == 71) {
@@ -132,20 +138,19 @@ double Adda(int w1, int w2, int w3, int w4, double w5, int nnp,
     csb[w2+1][w3] = w5;
   }
 
+
+  
   if (w1 = 80) {
-  
-  
+	  mu_e[w2][w3] = w5;
+  }
+
+  if (w1 = 81) {
+	  calcppr = w2;
   }
 
   // Loop over time                                                                                                 //calling cntrl
   if (w1 == 0) {
-	  if (w4 == 1) {
-		  calcppr = 0;
-		  mu_e = w5;
-	  }
-	  else {
-		  calcppr = 1;
-	  }
+	 
 	  fo = w1*df; //cout << fo << endl;
 	cntrl(se, nnp, nel, nsrf, band3, df, fo, ph, ec, fl, cn, tn, z, vps);
   }

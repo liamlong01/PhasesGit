@@ -38,7 +38,6 @@ extern double wr;
 extern double vsc;
 extern double tsol;
 extern double tmlt;
-extern double mu_e;
 extern double tmin;
 extern double tmax;
 extern double dtr;
@@ -73,6 +72,8 @@ extern double c[3*nnpm][6*nym+11]; // global stiffness matrix
 extern double r[3*nnpm]; // global right hand side
 extern double z[3*nnpm]; // global solution array
 extern double vps[nnpm][14]; // 1 - 3: U-V-P (time: n+1)
+
+extern double mu_e[nelm][npe1];
 
 // 4 - 9: U-V (time: n, iteration m), s (entropy), area (CV)
 // 10 - 13: entropy based diffusivity, smoothing coeffieicnts
