@@ -326,7 +326,7 @@ class ApplicationWindow(QtWidgets.QMainWindow):
         self.plot_menu = QtWidgets.QMenu('&Plot',self)
         self.plot_menu.addAction('Plot Settings', self.dockControls)
         self.plot_menu.addAction('Execute Phases', self.phasesExec)
-		self.plot_menu.addAction('Run Viscosity Ctrl Loop', self.phasesCtrlExec)
+        self.plot_menu.addAction('Run Viscosity Ctrl Loop', self.phasesCtrlExec)
         self.menuBar().addSeparator()
         self.menuBar().addMenu(self.plot_menu)
 
@@ -397,13 +397,13 @@ class ApplicationWindow(QtWidgets.QMainWindow):
   
         self.plotcontrols.reset(self.mesh.params['tstp'])
 		
-	def phasesCtrlExec(self, params=None):
+    def phasesCtrlExec(self, params=None):
 	
         if params is not None:
             self.mesh.params = params
 			
-		self.mesh.runCtrl()
-		self.plotcontrols.reset(self.mesh.params['tstp'])
+        self.mesh.runCtrl()
+        self.plotcontrols.reset(self.mesh.params['tstp'])
 
     def about(self):
         """Short dialog explaining what the application is"""

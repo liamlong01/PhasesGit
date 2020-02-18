@@ -18,7 +18,8 @@ class PhasesCaller():
         #right now there is only windows support for both 32 and 64-bit
         if platform.system() == 'Windows':
             if platform.architecture()[0] == '64bit':
-                self.dll = WinDLL('Phases/Resources/phases64.dll')
+                print('USING TEST CPP LIBRARY ....')
+                self.dll = WinDLL('Phases/Resources/test.dll')
             elif platform.architecture()[0] =='32bit':
                 self.dll = WinDLL('Phases/Resources/phases32.dll')
         
@@ -34,34 +35,34 @@ class PhasesCaller():
 							  
 							  
 							  
-		self.ctrl = self.dll['PyCtrl']
-		self.ctrl.restype = c_double
-		self.ctrl.argtypes = [c_int, c_int, c_int]
-		
-		self.PhaseTempCheck = self.dll['PyPhaseTempCheck']
-		self.PhaseTempCheck.restype = None
-		self.PhaseTempCheck.argtypes = [c_int]
-		
-		self.CtrlInit = self.dll['PyCtrlInit']
-		self.CtrlInit.restype = None
-		self.CtrlInit.argtypes = [c_int]
-		
-		self.CtrlC_init = self.dll['PyCtrlC_init']
-		self.CtrlC_init.restype = None
-		self.CtrlC_init.argtypes = [c_int]
-		
-		self.CtrlC = self.dll['PyCtrlC']
-		self.CtrlC.restype = c_double
-		self.CtrlC.argtypes = [c_int, c_int, c_int, c_int]
-		
-		self.CtrlT = self.dll['PyCtrlT']
-		self.CtrlT.restype = c_double
-		self.CtrlT.argtypes = [c_int, c_int, c_int]
-		
-		self.CtrlUVP = self.dll['PyCtrlUVP']
-		self.CtrlUVP.restype = c_double
-		self.CtrlUVP.argtypes = [c_int, c_int, c_int]
-        
+        self.ctrl = self.dll['PyCtrl']
+        self.ctrl.restype = c_double
+        self.ctrl.argtypes = [c_int, c_int, c_int]
+
+        self.PhaseTempCheck = self.dll['PyPhaseTempCheck']
+        self.PhaseTempCheck.restype = None
+        self.PhaseTempCheck.argtypes = [c_int]
+
+        self.CtrlInit = self.dll['PyCtrlInit']
+        self.CtrlInit.restype = None
+        self.CtrlInit.argtypes = [c_int]
+
+        self.CtrlC_init = self.dll['PyCtrlC_init']
+        self.CtrlC_init.restype = None
+        self.CtrlC_init.argtypes = [c_int]
+
+        self.CtrlC = self.dll['PyCtrlC']
+        self.CtrlC.restype = c_double
+        self.CtrlC.argtypes = [c_int, c_int, c_int, c_int]
+
+        self.CtrlT = self.dll['PyCtrlT']
+        self.CtrlT.restype = c_double
+        self.CtrlT.argtypes = [c_int, c_int, c_int]
+
+        self.CtrlUVP = self.dll['PyCtrlUVP']
+        self.CtrlUVP.restype = c_double
+        self.CtrlUVP.argtypes = [c_int, c_int, c_int]
+
     def phasesMain(self, files,steps):
 
         cfiles=files.copy()

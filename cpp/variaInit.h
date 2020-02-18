@@ -47,7 +47,7 @@ double dtr; // reference temperature, difference between max and min temperature
 double bt; // thermal expansion coefficent 
 double bs; // solutal expansion coefficient 
 double fo;// Fourier number, timestep the number of total steps 
-double mu_e;
+
 int calcppr;
 int ie[nelm][npe1]; // local to global node mapping
 int bgn[nsrfm][3]; // boundary global node numbers
@@ -77,6 +77,9 @@ double r[3*nnpm]; // global right hand side
 double z[3*nnpm]; // global solution array
 double vps[nnpm][14]; // 1 - 3: U-V-P (time: n+1)
 double aq[4][npe1][npe1], rq[npe1];
+double mu_e[nelm][npe1];
+
+double testVar;
 
 // 4 - 9: U-V (time: n, iteration m), s (entropy), area (CV)
 // 10 - 13: entropy based diffusivity, smoothing coeffieicnts

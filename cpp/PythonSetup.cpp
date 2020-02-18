@@ -24,7 +24,7 @@ double PyAdda(int w1, int w2, int w3, int w4, double w5, int nnp,
 	return Adda(w1, w2, w3, w4, w5, nnp, nel, nx, ny, nsrf);
 }
 
-double PyCtrl(int nnp, int nel, int nsrf) {
+void PyCtrl(int nnp, int nel, int nsrf) {
 
 	// Options: se = 1(C), 2(T), 3(UVP), 12(CT)
 	// Options: se = 13(CUVP), 23(TUVP), 4(CTUVP)
@@ -78,7 +78,7 @@ double PyCtrl(int nnp, int nel, int nsrf) {
 		if ((se == 3) || (se == 13) || (se == 23) || (se == 4)) {
 			for (n = 1; n <= tk; ++n) {
 
-				vdif = PyCtrlUVP(nel, nsrf, nnp, aq, rq);
+				vdif = PyCtrlUVP(nel, nsrf, nnp);
 
 				if (vdif <= tol) { break; }
 			}
@@ -92,7 +92,7 @@ double PyCtrl(int nnp, int nel, int nsrf) {
 	//entropy extensions
 	if (ao == 1) {
 		entropy(df, nel, nnp, nsrf, vps);														// calls entropy
-		dsmooth(nel, nnp, vps);																	// calls dsmooth
+		dsmooth(nel, nnp, vps);															// calls dsmooth
 	}
 
 }

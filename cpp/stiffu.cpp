@@ -52,6 +52,9 @@ void stiffu(int e, double df, double xip[npe1][3],
 	else {
 		ppr = mu_e[e][i];
 	}
+
+	testVar = ppr;
+
     for (j = 1; j <= nnpe; ++j) {
 
       // Diffusion, advection flux

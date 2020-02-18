@@ -24,7 +24,7 @@ double Adda(int w1, int w2, int w3, int w4, double w5, int nnp,
 // Exported DLL -> Visual Basic GUI
 // 1. New Project -> Win32 Project -> DLL
 // 2. use: '#include <windows.h>' and 'double _declspec ...'
-// 3. use: phasesb.def source file: LIBRARY phasesa
+// 3. us esa
 //                                  EXPORTS Adda
 // 4. remove: 'void main()' and previous 'double Adda ...'
 // 5. Debug -> Build -> c:\ ... \debug\phasesa.dll created
@@ -140,11 +140,11 @@ double Adda(int w1, int w2, int w3, int w4, double w5, int nnp,
 
 
   
-  if (w1 = 80) {
+  if (w1 == 80) {
 	  mu_e[w2][w3] = w5;
-  }
+  }	
 
-  if (w1 = 81) {
+  if (w1 == 81) {
 	  calcppr = w2;
   }
 
@@ -173,6 +173,8 @@ double Adda(int w1, int w2, int w3, int w4, double w5, int nnp,
       if (w3 == 2) addv = cl;
       if (w3 == 3) addv = um;
     }
+
+	if (w2 == 50) addv = testVar;
   }
 
   // EXE output test data

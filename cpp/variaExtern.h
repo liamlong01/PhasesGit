@@ -74,7 +74,7 @@ extern double z[3*nnpm]; // global solution array
 extern double vps[nnpm][14]; // 1 - 3: U-V-P (time: n+1)
 
 extern double mu_e[nelm][npe1];
-
+extern double testVar;
 // 4 - 9: U-V (time: n, iteration m), s (entropy), area (CV)
 // 10 - 13: entropy based diffusivity, smoothing coeffieicnts
 

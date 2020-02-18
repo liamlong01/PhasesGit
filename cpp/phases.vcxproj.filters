@@ -66,9 +66,6 @@
     <ClCompile Include="phase3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="phases.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="shape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -100,15 +97,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PythonSetup.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="iterUVP.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="iterT.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="iterC.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -49,7 +49,7 @@ void stiffv(int e, double df, double flux[4][npe1][npe1],
 		
 	}
 	else {
-		ppr = mu_e;
+		ppr = mu_e[e][i];
 	}
     for (j = 1; j <= nnpe; ++j) {
 
